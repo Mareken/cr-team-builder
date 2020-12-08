@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import styled from 'styled-components';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+import Header from './components/Header';
+import Board from './components/Board';
+import HeroesGrid from './components/HeroesGrid';
+import Traits from './components/Traits';
+import Aside from './components/Aside';
+
+const Main = styled.main`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 140px;
+`;
+
+const Center = styled.div`
+  margin: 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <Header />
+      <Main>
+        <Traits />
+        <Center>
+          <Board />
+          <HeroesGrid />
+        </Center>
+        <Aside />
+      </Main>
+    </DndProvider>
   );
 }
 
