@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import ContentLoader from 'react-content-loader'
 import { Context } from '../../data/Context/TraitsContext';

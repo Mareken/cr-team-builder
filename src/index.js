@@ -5,15 +5,18 @@ import App from './App';
 
 import TraitsStore from './data/Context/TraitsContext';
 import TeamStore from './data/Context/TeamContext';
+import HeroesStore from './data/Context/HeroesContext';
 
 import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
     <TraitsStore>
-      <TeamStore>
-        <App />
-      </TeamStore>
+      <HeroesStore>
+        <TeamStore>
+          <App />
+        </TeamStore>
+      </HeroesStore>
     </TraitsStore>
   </React.StrictMode>,
   document.getElementById('root')

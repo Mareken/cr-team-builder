@@ -1,0 +1,24 @@
+hero {
+  id: String,
+  name: String,
+  thumb: Image,
+  class: Array,
+  race: Array,
+  featured: Boolean,
+  cost: Number
+}
+
+team {
+  heroes [
+    {
+      position: 40,
+      heroId: String
+    }
+  ],
+  traits [
+    { 
+      traitId: String,
+      count: Number
+    }
+  ]
+}

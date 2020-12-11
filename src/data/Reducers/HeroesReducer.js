@@ -1,4 +1,4 @@
-const TraitsReducer = (state, action) => {
+const HeroesReducer = (state, action) => {
   switch (action.type) {
     case 'GET_TRAIT':
       return {
@@ -20,4 +20,4 @@ const TraitsReducer = (state, action) => {
   }
 }
 
-export default TraitsReducer;
+export default HeroesReducer;
