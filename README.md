@@ -1,9 +1,6 @@
-<p align="center">
-  <img src="https://github.com/Mareken/cr-team-builder/blob/master/src/assets/images/logo_full.png?raw=true" style="transform: scale(1.4);">
-  <br>
-  <h2 style="text-align: center;">Build your team and share with your friends 😉</h2>
-</p>
+# Chess Rush Team Builder
 
+Build your team and share with your friends 😉
 ## Overview
 
 A simple yet effective team builder for the popular mobile game Chess Rush, by Tencent Games. Without any involvement with the company, this project is based on other popular online team builders, like [TFTactics](https://tftactics.gg/team-builder) and [LoLChess](https://lolchess.gg/builder).
