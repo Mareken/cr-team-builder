@@ -4,7 +4,7 @@ import logo from '../../assets/images/logo_full.png';
 
 import { Container, Logo } from './styles';
 
-function Header () {
+const Header = () => {
   return (
     <Container>
       <Logo src={logo} className='noSelect' />

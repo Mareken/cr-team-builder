@@ -7,4 +7,8 @@ export const Container = styled.div`
   background: #344852;
   cursor: pointer;
   transition: all .1s ease;
+
+  @media screen and (max-width: 1200px) {
+    height: 50px;
+  }
 `;

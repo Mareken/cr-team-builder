@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import ContentLoader from 'react-content-loader'
-import { Context } from '../../data/Context/TraitsContext';
+import useTeam from '../../context/TeamContext';
 
 import { Container, Trait, TraitImage, TraitBadgeNumber, TraitContent, TraitName, TraitRatio, EmptyState, EmptyStateText, Popup, PopupTitle, PopupDescriptionPre, PopupDescriptionAfter, PopupStages, Stage, StageNumber, StageDescription } from './styles';
 
-function Traits () {
-  const [ state ] = useContext(Context);
+const Traits = () => {
+  const { state } = useTeam();
 
   return (
     <Container>
       {
-        !state.error && state.traits && state.traits.map(trait => {
+        !state.error && state.team.traits && state.team.traits.map(trait => {
           const active = trait.curr >= trait.stagesCount[0];
 
           return (
@@ -75,9 +75,9 @@ function Traits () {
         )})
       }
 
-      {/* <EmptyState>
+      <EmptyState>
         <EmptyStateText>Sem sinergias ativas</EmptyStateText>
-      </EmptyState> */}
+      </EmptyState>
     </Container>
   );
 }

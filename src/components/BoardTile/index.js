@@ -5,7 +5,7 @@ import { ItemTypes } from '../../utils/types';
 
 import { Container } from './styles';
 
-function BoardTile ({ index }) {
+const BoardTile = ({ index }) => {
   const [{ isOver }, drop ] = useDrop({
     accept: ItemTypes.TILE,
     drop: (item, monitor) => ({

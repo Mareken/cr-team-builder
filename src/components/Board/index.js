@@ -4,7 +4,7 @@ import BoardTile from '../BoardTile';
 
 import { Container } from './styles';
 
-function Board () {
+const Board = () => {
   return (
     <Container>
       {

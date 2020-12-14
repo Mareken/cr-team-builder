@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import useHeroes from '../../context/HeroesContext';
 import { Search } from 'react-feather';
 import HeroTile from '../HeroTile';
 
 import { Container, Header, LeftSide, OrderBtn, RightSide, SearchInput, Grid } from './styles';
 
-function HeroesGrid () {
+const HeroesGrid = () => {
   const [ search, setSearch ] = useState('');
   const [ sorting, setSorting ] = useState('cost');
+  const { state } = useHeroes();
 
-  function handleChange (evt) {
+  useEffect(() => {
+    console.log(state);
+  }, []);
+
+  const handleChange = evt => {
     setSearch(evt.target.value);
   }
 
-  function handleSelectSorting (method) {
+  const handleSelectSorting = method => {
     setSorting(method);
   }
 

@@ -11,20 +11,35 @@ import Traits from './components/Traits';
 import Aside from './components/Aside';
 
 const Main = styled.main`
-  width: 100%;
   display: flex;
   align-items: flex-start;
-  padding: 0 140px;
+
+  @media screen and (min-width: 360px) {
+    padding: 0 40px; 
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 930px;
+    padding: 0 140px;
+  }
 `;
 
 const Center = styled.div`
-  margin: 0 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: 360px) {
+    margin: 0 32px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin: 0 64px;
+  }
 `;
 
-function App () {
+const App = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <Header />

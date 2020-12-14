@@ -5,7 +5,7 @@ import { useDrag } from 'react-dnd';
 
 import { Container } from './styles';
 
-function HeroTile ({ id }) {
+const HeroTile = ({ id }) => {
   const item = { id, type: ItemTypes.TILE };
 
   const [{ opacity }, drag] = useDrag({

@@ -7,4 +7,10 @@ export const Container = styled.div`
   gap: 16px;
   justify-self: center;
   margin-bottom: 32px;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(8, 50px);
+    grid-gap: 16px;
+    gap: 16px;
+  }
 `;

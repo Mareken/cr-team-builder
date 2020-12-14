@@ -18,4 +18,8 @@ export const Container = styled.div`
   &:nth-of-type(16n+1) {
     background: #22333B;
   }
+
+  @media screen and (max-width: 1200px) {
+    height: 50px;
+  }
 `;

@@ -5,6 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   position: relative;
   padding-bottom: 64px;
+  width: 100%;
+  align-items: center;
 `;
 
 export const Header = styled.div`
@@ -58,4 +60,10 @@ export const Grid = styled.div`
   grid-gap: 8px;
   gap: 8px;
   margin-top: 16px;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(8, 50px);
+    grid-gap: 8px;
+    gap: 8px;
+  }
 `;

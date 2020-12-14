@@ -1,31 +1,30 @@
-import React, { createContext, useReducer } from 'react';
-import TraitsReducer from '../Reducers/TraitsReducer';
+import React, { createContext, useState, useCallback, useContext } from 'react';
 
-import angel from '../../assets/images/traits/angel_icon.png';
-import assassin from '../../assets/images/traits/assassin_icon.png';
-import beast from '../../assets/images/traits/beast_icon.png';
-import cyborg from '../../assets/images/traits/cyborg_icon.png';
-import demon from '../../assets/images/traits/demon_icon.png';
-import dragon from '../../assets/images/traits/dragon_icon.png';
-import druid from '../../assets/images/traits/druid_icon.png';
-import eastern from '../../assets/images/traits/eastern_icon.png';
-import elf from '../../assets/images/traits/elf_icon.png';
-import goblin from '../../assets/images/traits/goblin_icon.png';
-import human from '../../assets/images/traits/human_icon.png';
-import hunter from '../../assets/images/traits/hunter_icon.png';
-import guru from '../../assets/images/traits/guru_icon.png';
-import oceanborn from '../../assets/images/traits/oceanborn_icon.png';
-import olympian from '../../assets/images/traits/olympian_icon.png';
-import protector from '../../assets/images/traits/protector_icon.png';
-import punisher from '../../assets/images/traits/punisher_icon.png';
-import rider from '../../assets/images/traits/rider_icon.png';
-import sorcerer from '../../assets/images/traits/sorcerer_icon.png';
-import summoner from '../../assets/images/traits/summoner_icon.png';
-import undead from '../../assets/images/traits/undead_icon.png';
-import voidIcon from '../../assets/images/traits/void_icon.png';
-import warlock from '../../assets/images/traits/warlock_icon.png';
-import warlord from '../../assets/images/traits/warlord_icon.png';
-import warrior from '../../assets/images/traits/warrior_icon.png';
+import angel from '../assets/images/traits/angel_icon.png';
+import assassin from '../assets/images/traits/assassin_icon.png';
+import beast from '../assets/images/traits/beast_icon.png';
+import cyborg from '../assets/images/traits/cyborg_icon.png';
+import demon from '../assets/images/traits/demon_icon.png';
+import dragon from '../assets/images/traits/dragon_icon.png';
+import druid from '../assets/images/traits/druid_icon.png';
+import eastern from '../assets/images/traits/eastern_icon.png';
+import elf from '../assets/images/traits/elf_icon.png';
+import goblin from '../assets/images/traits/goblin_icon.png';
+import human from '../assets/images/traits/human_icon.png';
+import hunter from '../assets/images/traits/hunter_icon.png';
+import guru from '../assets/images/traits/guru_icon.png';
+import oceanborn from '../assets/images/traits/oceanborn_icon.png';
+import olympian from '../assets/images/traits/olympian_icon.png';
+import protector from '../assets/images/traits/protector_icon.png';
+import punisher from '../assets/images/traits/punisher_icon.png';
+import rider from '../assets/images/traits/rider_icon.png';
+import sorcerer from '../assets/images/traits/sorcerer_icon.png';
+import summoner from '../assets/images/traits/summoner_icon.png';
+import undead from '../assets/images/traits/undead_icon.png';
+import voidIcon from '../assets/images/traits/void_icon.png';
+import warlock from '../assets/images/traits/warlock_icon.png';
+import warlord from '../assets/images/traits/warlord_icon.png';
+import warrior from '../assets/images/traits/warrior_icon.png';
 
 const initialState = {
   traits: [
@@ -308,15 +307,29 @@ const initialState = {
   error: null
 }
 
-const TraitsStore = ({ children }) => {
-  const [ state, dispatch ] = useReducer(TraitsReducer, initialState);
+const TraitsContext = createContext();
+
+const TraitsProvider = ({ children }) => {
+  const [ state, ] = useState(initialState);
+
+  const getTraitById = useCallback(id => {
+    console.log(state);
+  }, []);
 
   return (
-    <Context.Provider value={[ state, dispatch ]}>
+    <TraitsContext.Provider value={{ state, getTraitById }}>
       { children }
-    </Context.Provider>
+    </TraitsContext.Provider>
   )
 }
 
-export const Context = createContext(initialState);
-export default TraitsStore;
+const useTraits = () => {
+  const context = useContext(TraitsContext);
+
+  if (!context)
+    throw new Error('useTraits must be used within a TraitsProvider');
+
+  return context;
+}
+
+export { TraitsProvider, useTraits as default };

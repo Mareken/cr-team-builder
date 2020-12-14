@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, BtnClearTeam, BtnShare } from './styles';
 
-function Aside () {
+const Aside = () => {
   return (
     <Container>
       <BtnClearTeam>Limpar Time</BtnClearTeam>
