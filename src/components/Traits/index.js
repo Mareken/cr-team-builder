@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ContentLoader from 'react-content-loader'
 import useTeam from '../../context/TeamContext';
@@ -8,9 +8,13 @@ import { Container, Trait, TraitImage, TraitBadgeNumber, TraitContent, TraitName
 const Traits = () => {
   const { state } = useTeam();
 
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
     <Container>
-      {
+      {/* {
         !state.error && state.team.traits && state.team.traits.map(trait => {
           const active = trait.curr >= trait.stagesCount[0];
 
@@ -73,7 +77,7 @@ const Traits = () => {
               </Popup>
             </Trait>
         )})
-      }
+      } */}
 
       <EmptyState>
         <EmptyStateText>Sem sinergias ativas</EmptyStateText>

@@ -1,11 +1,15 @@
 import React from 'react';
 
+import useTeam from '../../context/TeamContext';
+
 import { Container, BtnClearTeam, BtnShare } from './styles';
 
 const Aside = () => {
+  const { clearTeam } = useTeam();
+
   return (
     <Container>
-      <BtnClearTeam>Limpar Time</BtnClearTeam>
+      <BtnClearTeam onClick={clearTeam}>Limpar Time</BtnClearTeam>
       <BtnShare>Compartilhar</BtnShare>
     </Container>
   );

@@ -11,9 +11,15 @@ const HeroesGrid = () => {
   const [ sorting, setSorting ] = useState('cost');
   const { state } = useHeroes();
 
-  useEffect(() => {
-    console.log(state);
-  }, []);
+  const compare = (a, b) => {
+    if (a[sorting] < b[sorting]){
+      return -1;
+    }
+    if (a[sorting] > b[sorting]){
+      return 1;
+    }
+    return 0;
+  }
 
   const handleChange = evt => {
     setSearch(evt.target.value);
@@ -43,8 +49,8 @@ const HeroesGrid = () => {
             Preço
           </OrderBtn>
           <OrderBtn
-            onClick={() => handleSelectSorting('az')}
-            selected={sorting === 'az'}
+            onClick={() => handleSelectSorting('name')}
+            selected={sorting === 'name'}
           >
             A-Z
           </OrderBtn>
@@ -53,10 +59,10 @@ const HeroesGrid = () => {
 
       <Grid>
         {
-          Array.from(Array(70).keys()).map((_, i) => (
+          state.sort(compare).map(hero => (
             <HeroTile
-              key={i}
-              id={i}
+              key={hero.id}
+              hero={hero}
             />
           ))
         }
