@@ -62,10 +62,17 @@ const Traits = () => {
     }
   }, [team]);
 
+  const compare = (a, b) => {
+    const activeA = a.curr >= a.stagesCount[0];
+    const activeB = b.curr >= b.stagesCount[0];
+
+    return (activeA === activeB) ? 0 : activeA ? -1 : 1;
+  };
+
   return (
     <Container>
       {
-        teamTraits.length > 0 ? teamTraits.map(trait => {
+        teamTraits.length > 0 ? teamTraits.sort(compare).map(trait => {
           const active = trait.curr >= trait.stagesCount[0];
 
           return (
