@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import useHeroes from '../../context/HeroesContext';
 import { Search } from 'react-feather';
+import { useDrop } from 'react-dnd';
+import useHeroes from '../../context/HeroesContext';
+import useTeam from '../../context/TeamContext';
+import { ItemTypes } from '../../utils/types';
+
 import HeroTile from '../HeroTile';
 
 import { Container, Header, LeftSide, OrderBtn, RightSide, SearchInput, Grid } from './styles';
@@ -9,7 +13,19 @@ import { Container, Header, LeftSide, OrderBtn, RightSide, SearchInput, Grid } f
 const HeroesGrid = () => {
   const [ search, setSearch ] = useState('');
   const [ sorting, setSorting ] = useState('cost');
-  const { state } = useHeroes();
+  const { heroes } = useHeroes();
+
+  const { removeHero } = useTeam();
+
+  const [{ isOver }, drop ] = useDrop({
+    accept: ItemTypes.TILE,
+    drop: (item) => {
+      if (item.onBoard) removeHero(item.hero);
+    },
+    collect: monitor => ({
+      isOver: monitor.isOver()
+    }),
+  });
 
   const compare = (a, b) => {
     if (a[sorting] < b[sorting]){
@@ -57,9 +73,11 @@ const HeroesGrid = () => {
         </RightSide>
       </Header>
 
-      <Grid>
+      <Grid
+        ref={drop}
+      >
         {
-          state.sort(compare).map(hero => (
+          heroes.sort(compare).map(hero => (
             <HeroTile
               key={hero.id}
               hero={hero}

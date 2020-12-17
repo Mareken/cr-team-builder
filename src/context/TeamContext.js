@@ -1,74 +1,68 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const initialState = {
-  team: {
-    id: '',
-    heroes: Array(32).fill(''),
-    traits: {}
-  },
-  error: null
-}
-
 const TeamContext = createContext();
 
 const TeamProvider = ({ children }) => {
-  const [ state, setState ] = useState(initialState);
+  const [ team, setTeam ] = useState(Array(32).fill(''));
 
-  const addHero = hero => {
-    const curr = { ...state };
+  const addHero = (hero, position) => {
+    const curr = [ ...team ];
+
+    if (curr.every(item => item)) return;
+
+    if (position) {
+      curr[position] = {
+        hero: hero,
+        position: position,
+        items: [],
+        level: 1
+      };
+    }
+    else {
+      curr.some((item, index) => {
+        if (!item) {
+          curr[index] = {
+            hero: hero,
+            position: index,
+            items: [],
+            level: 1
+          };
     
-    curr.team.heroes.some((item, index) => {
-      if (!item) {
-        curr.team.heroes[index] = hero;
-  
-        return true;
-      }
-      else {
-        return false;
-      }
-    });
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
+    }
+    
+    setTeam(curr);
+  };
 
-    if (curr.team.traits[hero.class]) {
-      curr.team.traits[hero.class] += 1;
-    }
-    else {
-      curr.team.traits[hero.class] = 1;
-    }
+  const removeHero = (hero, index) => {
+    const curr = [ ...team ];
+    const pos = team.filter(item => item && item.hero.id === hero.id && item.position === index)[0].position;
 
-    if (curr.team.traits[hero.race]) {
-      curr.team.traits[hero.race] += 1;
-    }
-    else {
-      curr.team.traits[hero.race] = 1;
-    }
+    curr[pos] = '';
 
-    setState(curr);
+    setTeam(curr);
   }
 
-  const removeHero = (hero) => {
-    setState({
-      ...state,
-      team: {
-        ...state.team,
-        heroes: state.team.heroes.map(item => item.id === hero.id ? '' : item),
-        //traits: state.team.traits.map(trait => trait.name === hero.name ? { trait: trait -= 1 } : trait)
-      }
-    })
-  }
+  const swapPositions = (id, finalPos) => {
+    const curr = [ ...team ];
+    const initialPos = curr.filter(item => item && item.hero.id === id)[0].position;
+    
+    [ curr[initialPos], curr[finalPos] ] = [ curr[finalPos], curr[initialPos] ];
+    
+    setTeam(curr);
+  };
 
   const clearTeam = () => {
-    setState({
-      ...state,
-      team: {
-        id: '',
-        heroes: Array.from(Array(32)),
-        traits: {}
-      }
-    })
+    setTeam(Array(32).fill(''));
   }
 
   return (
-    <TeamContext.Provider value={{ state, addHero, removeHero, clearTeam }}>
+    <TeamContext.Provider value={{ team, addHero, removeHero, clearTeam, swapPositions }}>
       { children }
     </TeamContext.Provider>
   )

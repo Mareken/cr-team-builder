@@ -14,6 +14,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  transform: ${props => props.board ? 'translateY(-2px) scaleX(1.05)' : 'none'};
 
   @media screen and (max-width: 1200px) {
     height: 50px;

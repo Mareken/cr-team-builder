@@ -9,9 +9,9 @@ import { ItemTypes } from '../../utils/types';
 
 import { Container, FeaturedBadge, Thumb } from './styles';
 
-const HeroTile = ({ hero, onBoard = false }) => {
+const HeroTile = ({ hero, onBoard = false, index }) => {
   const { addHero, removeHero } = useTeam();
-  const item = { hero, type: ItemTypes.TILE };
+  const item = { hero, onBoard, type: ItemTypes.TILE };
 
   const [{ opacity }, drag] = useDrag({
     item,
@@ -20,9 +20,7 @@ const HeroTile = ({ hero, onBoard = false }) => {
     }),
   })
 
-  console.log(hero);
-
-  const handleAddHero = evt => {
+  const handleAddHero = () => {
     if (onBoard) return;
 
     addHero(hero);
@@ -30,7 +28,7 @@ const HeroTile = ({ hero, onBoard = false }) => {
   
   const handleRemoveHero = () => {
     if (onBoard) {
-      removeHero(hero);
+      removeHero(hero, index);
     }
   }
 
@@ -41,6 +39,7 @@ const HeroTile = ({ hero, onBoard = false }) => {
       cost={hero.cost}
       title={hero.name}
       aria-label={hero.name}
+      board={onBoard}
       onClick={handleAddHero}
       onContextMenu={handleRemoveHero}
     >

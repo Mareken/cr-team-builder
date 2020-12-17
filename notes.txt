@@ -8,17 +8,11 @@ hero {
   cost: Number
 }
 
-team {
-  heroes [
-    {
-      position: 40,
-      heroId: String
-    }
-  ],
-  traits [
-    { 
-      traitId: String,
-      count: Number
-    }
-  ]
-}
+team [
+  {
+    id: String,
+    position: Number,
+    level: 1,
+    items: []
+  }
+]

@@ -6,16 +6,16 @@ import BoardTile from '../BoardTile';
 import { Container } from './styles';
 
 const Board = () => {
-  const { state } = useTeam();
+  const { team } = useTeam();
 
   return (
     <Container>
       {
-        state.team.heroes.map((hero, i) => (
+        team.map((item, i) => (
           <BoardTile
             key={i}
+            hero={item.hero}
             index={i}
-            hero={hero}
           />
         ))
       }
