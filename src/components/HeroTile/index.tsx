@@ -1,21 +1,27 @@
 import React from 'react';
 
-import { useDrag } from 'react-dnd';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
 import Icon from '@mdi/react';
 import { mdiCrown } from '@mdi/js';
 import useTeam from '../../context/TeamContext'; 
 
-import { ItemTypes } from '../../utils/types';
+import { ItemTypes, Hero } from '../../utils/types';
 
 import { Container, FeaturedBadge, Thumb } from './styles';
 
-const HeroTile = ({ hero, onBoard = false, index }) => {
+interface HeroTileProps {
+  hero: Hero;
+  onBoard?: boolean;
+  index: number;
+}
+
+const HeroTile: React.FC<HeroTileProps> = ({ hero, onBoard = false, index }) => {
   const { addHero, removeHero } = useTeam();
-  const item = { hero, onBoard, type: ItemTypes.TILE };
+  const item = { hero, onBoard, type: ItemTypes.TILE, position: index };
 
   const [{ opacity }, drag] = useDrag({
     item,
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       opacity: !!monitor.isDragging() ? 0.4 : 1
     }),
   })

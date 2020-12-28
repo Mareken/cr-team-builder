@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface Props {
+  selected: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,7 +27,7 @@ export const LeftSide = styled.div`
   margin-right: 16px;
 `;
 
-export const OrderBtn = styled.button`
+export const OrderBtn = styled.button<Props>`
   border-radius: 5px;
   border: none;
   background: ${props => props.selected ? '#0087C2' : '#22333B'};

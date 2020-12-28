@@ -4,7 +4,7 @@ import logo from '../../assets/images/logo_full.png';
 
 import { Container, Logo } from './styles';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <Container>
       <Logo src={logo} className='noSelect' />

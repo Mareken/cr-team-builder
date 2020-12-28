@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface Props {
+  isOver: boolean;
+}
+
+export const Container = styled.div<Props>`
   height: 70px;
   border: 2px solid transparent;
   border-radius: 2px;
-  background: ${props => props.isOver ? '#0087C2 !important' : '#344852'};
+  background: ${(props: any) => props.isOver ? '#0087C2 !important' : '#344852'};
   transition: all .1s ease;
-  border-color: ${props => props.isOver ? '#0087C2' : '#425C68'};
+  border-color: ${(props: any) => props.isOver ? '#0087C2' : '#425C68'};
 
   &:nth-of-type(16n+16),
   &:nth-of-type(16n+14),

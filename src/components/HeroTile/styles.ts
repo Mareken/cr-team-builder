@@ -2,7 +2,14 @@ import styled from 'styled-components';
 
 const colors = [ '#fff', '#5BB2C4', '#3392E0', '#D92BD2', '#DFB460' ];
 
-export const Container = styled.div`
+interface Props {
+  cost: number;
+  board: boolean;
+  isSvg: boolean;
+  bg: string;
+}
+
+export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   height: 70px;
   border: 2px solid transparent;
   border-radius: 2px;
@@ -21,7 +28,7 @@ export const Container = styled.div`
   }
 `;
 
-export const FeaturedBadge = styled.div`
+export const FeaturedBadge = styled.div<Pick<Props, 'cost'>>`
   position: absolute;
   top: -1px;
   right: -1px;
@@ -35,7 +42,7 @@ export const FeaturedBadge = styled.div`
   z-index: 2;
 `;
 
-export const Thumb = styled.div`
+export const Thumb = styled.div<Pick<Props, 'bg' | 'isSvg'>>`
   width: ${props => props.isSvg ? '100%' : '80%'};
   height: ${props => props.isSvg ? '100%' : '80%'};
   background: ${props => `url(${props.bg})`};

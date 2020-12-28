@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, PropsWithChildren } from 'react';
 import { uid } from '../utils/helpers';
+import { HeroesData } from '../utils/types';
 
 import anubis from '../assets/images/thumbs/anubis_thumb.svg';
 import archanjo from '../assets/images/thumbs/archangel_thumb.svg';
@@ -78,8 +79,8 @@ const initialState = [
     id: uid(),
     name: 'Anúbis',
     thumb: anubis,
-    class: 'cavaleiro',
-    race: 'vazio',
+    class: ['cavaleiro'],
+    race: ['vazio'],
     featured: false,
     cost: 3
   },
@@ -87,8 +88,8 @@ const initialState = [
     id: uid(),
     name: 'Arcanjo (Michaela)',
     thumb: archanjo,
-    class: 'mago',
-    race: 'anjo',
+    class: ['mago'],
+    race: ['anjo'],
     featured: true,
     cost: 4
   },
@@ -96,8 +97,8 @@ const initialState = [
     id: uid(),
     name: 'Atena',
     thumb: atena,
-    class: 'protetor',
-    race: 'olimpiano',
+    class: ['protetor'],
+    race: ['olimpiano'],
     featured: false,
     cost: 3
   },
@@ -105,8 +106,8 @@ const initialState = [
     id: uid(),
     name: 'Bajie',
     thumb: bajie,
-    class: 'protetor',
-    race: 'oriental',
+    class: ['protetor'],
+    race: ['oriental'],
     featured: true,
     cost: 1
   },
@@ -114,8 +115,8 @@ const initialState = [
     id: uid(),
     name: 'Bangar',
     thumb: bangar,
-    class: 'guerreiro',
-    race: 'fera',
+    class: ['guerreiro'],
+    race: ['fera'],
     featured: false,
     cost: 1
   },
@@ -123,8 +124,8 @@ const initialState = [
     id: uid(),
     name: 'Berserker',
     thumb: berserker,
-    class: 'guerreiro',
-    race: 'goblin',
+    class: ['guerreiro'],
+    race: ['goblin'],
     featured: false,
     cost: 4
   },
@@ -132,8 +133,8 @@ const initialState = [
     id: uid(),
     name: 'Ninja Biônico',
     thumb: bionicNinja,
-    class: 'assassino',
-    race: 'ciborgue',
+    class: ['assassino'],
+    race: ['ciborgue'],
     featured: false,
     cost: 1
   },
@@ -141,8 +142,8 @@ const initialState = [
     id: uid(),
     name: 'Calamidade',
     thumb: calamity,
-    class: 'cavaleiro',
-    race: 'morto-vivo',
+    class: ['cavaleiro'],
+    race: ['morto-vivo'],
     featured: false,
     cost: 3
   },
@@ -150,8 +151,8 @@ const initialState = [
     id: uid(),
     name: 'Cérbero',
     thumb: cerberus,
-    class: 'caçador',
-    race: 'demônio',
+    class: ['caçador'],
+    race: ['demônio'],
     featured: false,
     cost: 4
   },
@@ -159,8 +160,8 @@ const initialState = [
     id: uid(),
     name: 'Mago Sombrio',
     thumb: darkWizard,
-    class: 'feiticeiro',
-    race: 'morto-vivo',
+    class: ['feiticeiro'],
+    race: ['morto-vivo'],
     featured: true,
     cost: 5
   },
@@ -168,8 +169,8 @@ const initialState = [
     id: uid(),
     name: 'Caminhante',
     thumb: dimensionWalker,
-    class: 'justiceiro',
-    race: 'vazio',
+    class: ['justiceiro'],
+    race: ['vazio'],
     featured: false,
     cost: 4
   },
@@ -177,8 +178,8 @@ const initialState = [
     id: uid(),
     name: 'Dra Molly',
     thumb: drMolly,
-    class: 'invocador',
-    race: 'ciborgue',
+    class: ['invocador'],
+    race: ['ciborgue'],
     featured: true,
     cost: 4
   },
@@ -186,7 +187,7 @@ const initialState = [
     id: uid(),
     name: 'Dragoon',
     thumb: dragoon,
-    class: 'cavaleiro',
+    class: ['cavaleiro'],
     race: ['oriental', 'dragão'],
     featured: false,
     cost: 4
@@ -196,7 +197,7 @@ const initialState = [
     name: 'Sempre-florida',
     thumb: everbloom,
     class: ['invocador', 'druida'],
-    race: 'elfo',
+    race: ['elfo'],
     featured: false,
     cost: 3
   },
@@ -205,7 +206,7 @@ const initialState = [
     name: 'Sempre-verde',
     thumb: evergreen,
     class: ['protetor', 'druida'],
-    race: 'elfo',
+    race: ['elfo'],
     featured: true,
     cost: 3
   },
@@ -213,8 +214,8 @@ const initialState = [
     id: uid(),
     name: 'Faminta',
     thumb: famine,
-    class: 'caçador',
-    race: 'morto-vivo',
+    class: ['caçador'],
+    race: ['morto-vivo'],
     featured: false,
     cost: 1
   },
@@ -222,8 +223,8 @@ const initialState = [
     id: uid(),
     name: 'Pelo de Fogo',
     thumb: fireFur,
-    class: 'caçador',
-    race: 'fera',
+    class: ['caçador'],
+    race: ['fera'],
     featured: true,
     cost: 2
   },
@@ -231,8 +232,8 @@ const initialState = [
     id: uid(),
     name: 'Feiticeira das Chamas',
     thumb: flamecaller,
-    class: 'feiticeiro',
-    race: 'humano',
+    class: ['feiticeiro'],
+    race: ['humano'],
     featured: false,
     cost: 3
   },
@@ -240,8 +241,8 @@ const initialState = [
     id: uid(),
     name: 'Sopro da Floresta',
     thumb: forestsBreath,
-    class: 'caçador',
-    race: 'elfo',
+    class: ['caçador'],
+    race: ['elfo'],
     featured: true,
     cost: 3
   },
@@ -249,8 +250,8 @@ const initialState = [
     id: uid(),
     name: 'Lótus de Gelo',
     thumb: frostLotus,
-    class: 'feiticeiro',
-    race: 'humano',
+    class: ['feiticeiro'],
+    race: ['humano'],
     featured: false,
     cost: 1
   },
@@ -258,8 +259,8 @@ const initialState = [
     id: uid(),
     name: 'General da Guerra',
     thumb: generalOfWar,
-    class: 'guerreiro',
-    race: 'humano',
+    class: ['guerreiro'],
+    race: ['humano'],
     featured: false,
     cost: 3
   },
@@ -267,7 +268,7 @@ const initialState = [
     id: uid(),
     name: 'General Puffer',
     thumb: generalPuffer,
-    class: 'guerreiro',
+    class: ['guerreiro'],
     race: ['oriental', 'oceânico'],
     featured: true,
     cost: 2
@@ -276,8 +277,8 @@ const initialState = [
     id: uid(),
     name: 'Glutton',
     thumb: glutton,
-    class: 'guerreiro',
-    race: 'morto-vivo',
+    class: ['guerreiro'],
+    race: ['morto-vivo'],
     featured: false,
     cost: 2
   },
@@ -285,8 +286,8 @@ const initialState = [
     id: uid(),
     name: 'Esmaga Solo',
     thumb: groundsmasher,
-    class: 'protetor',
-    race: 'ciborgue',
+    class: ['protetor'],
+    race: ['ciborgue'],
     featured: false,
     cost: 3
   },
@@ -294,8 +295,8 @@ const initialState = [
     id: uid(),
     name: 'Gurru',
     thumb: gurru,
-    class: 'druida',
-    race: 'gurru',
+    class: ['druida'],
+    race: ['gurru'],
     featured: false,
     cost: 4
   },
@@ -303,8 +304,8 @@ const initialState = [
     id: uid(),
     name: 'Caçador de Cabeças',
     thumb: headreaper,
-    class: 'assassino',
-    race: 'goblin',
+    class: ['assassino'],
+    race: ['goblin'],
     featured: false,
     cost: 4
   },
@@ -313,7 +314,7 @@ const initialState = [
     name: 'Goblin Caçador',
     thumb: hogRider,
     class: ['cavaleiro', 'caçador'],
-    race: 'goblin',
+    race: ['goblin'],
     featured: false,
     cost: 1
   },
@@ -321,8 +322,8 @@ const initialState = [
     id: uid(),
     name: 'Escaravelho',
     thumb: hornedMenace,
-    class: 'assassino',
-    race: 'fera',
+    class: ['assassino'],
+    race: ['fera'],
     featured: true,
     cost: 3
   },
@@ -330,8 +331,8 @@ const initialState = [
     id: uid(),
     name: 'Presas de Gelo',
     thumb: icetusk,
-    class: 'guerreiro',
-    race: 'fera',
+    class: ['guerreiro'],
+    race: ['fera'],
     featured: true,
     cost: 1
   },
@@ -339,8 +340,8 @@ const initialState = [
     id: uid(),
     name: "Joana D'arc",
     thumb: joanOfArc,
-    class: 'invocador',
-    race: 'humano',
+    class: ['invocador'],
+    race: ['humano'],
     featured: true,
     cost: 1
   },
@@ -348,8 +349,8 @@ const initialState = [
     id: uid(),
     name: 'Shakaraka',
     thumb: shakaraka,
-    class: 'caçador',
-    race: 'oceânico',
+    class: ['caçador'],
+    race: ['oceânico'],
     featured: false,
     cost: 5
   },
@@ -357,8 +358,8 @@ const initialState = [
     id: uid(),
     name: 'Kraken',
     thumb: kraken,
-    class: 'caçador',
-    race: 'oceânico',
+    class: ['caçador'],
+    race: ['oceânico'],
     featured: false,
     cost: 3
   },
@@ -366,8 +367,8 @@ const initialState = [
     id: uid(),
     name: 'Lancelote',
     thumb: lancelot,
-    class: 'justiceiro',
-    race: 'humano',
+    class: ['justiceiro'],
+    race: ['humano'],
     featured: false,
     cost: 2
   },
@@ -375,8 +376,8 @@ const initialState = [
     id: uid(),
     name: 'Portadora da Luz',
     thumb: lightbringer,
-    class: 'feiticeiro',
-    race: 'humano',
+    class: ['feiticeiro'],
+    race: ['humano'],
     featured: false,
     cost: 4
   },
@@ -384,8 +385,8 @@ const initialState = [
     id: uid(),
     name: 'Lilith',
     thumb: lilith,
-    class: 'assassino',
-    race: 'demônio',
+    class: ['assassino'],
+    race: ['demônio'],
     featured: false,
     cost: 2
   },
@@ -393,7 +394,7 @@ const initialState = [
     id: uid(),
     name: 'Lúcifer (Anjo Caído)',
     thumb: lucifer,
-    class: 'justiceiro',
+    class: ['justiceiro'],
     race: ['anjo', 'demônio'],
     featured: false,
     cost: 3
@@ -403,7 +404,7 @@ const initialState = [
     name: 'Marsh Lord',
     thumb: marshLord,
     class: ['invocador', 'mago'],
-    race: 'fera',
+    race: ['fera'],
     featured: true,
     cost: 2
   },
@@ -411,8 +412,8 @@ const initialState = [
     id: uid(),
     name: 'Supersônica',
     thumb: missSupersonic,
-    class: 'feiticeiro',
-    race: 'ciborgue',
+    class: ['feiticeiro'],
+    race: ['ciborgue'],
     featured: false,
     cost: 1
   },
@@ -420,7 +421,7 @@ const initialState = [
     id: uid(),
     name: 'Dragão do Luar',
     thumb: moonlightDragon,
-    class: 'feiticeiro',
+    class: ['feiticeiro'],
     race: ['elfo', 'dragão'],
     featured: false,
     cost: 2
@@ -429,8 +430,8 @@ const initialState = [
     id: uid(),
     name: 'Príncipe do Inferno',
     thumb: netherPrince,
-    class: 'mago',
-    race: 'demônio',
+    class: ['mago'],
+    race: ['demônio'],
     featured: true,
     cost: 3
   },
@@ -438,8 +439,8 @@ const initialState = [
     id: uid(),
     name: 'Nezha (Príncipe de Lótus)',
     thumb: nezha,
-    class: 'justiceiro',
-    race: 'oriental',
+    class: ['justiceiro'],
+    race: ['oriental'],
     featured: true,
     cost: 5
   },
@@ -447,8 +448,8 @@ const initialState = [
     id: uid(),
     name: 'Rouxinol',
     thumb: nightingale,
-    class: 'justiceiro',
-    race: 'elfo',
+    class: ['justiceiro'],
+    race: ['elfo'],
     featured: false,
     cost: 1
   },
@@ -456,8 +457,8 @@ const initialState = [
     id: uid(),
     name: 'Coruja da Noite',
     thumb: nightowl,
-    class: 'invocador',
-    race: 'fera',
+    class: ['invocador'],
+    race: ['fera'],
     featured: false,
     cost: 3
   },
@@ -465,7 +466,7 @@ const initialState = [
     id: uid(),
     name: 'Poseidon',
     thumb: poseidon,
-    class: 'invocador',
+    class: ['invocador'],
     race: ['olimpiano', 'oceânico'],
     featured: false,
     cost: 4
@@ -474,8 +475,8 @@ const initialState = [
     id: uid(),
     name: 'Proto-Estrela',
     thumb: protostar,
-    class: 'protetor',
-    race: 'vazio',
+    class: ['protetor'],
+    race: ['vazio'],
     featured: false,
     cost: 2
   },
@@ -483,8 +484,8 @@ const initialState = [
     id: uid(),
     name: 'Rafaella (Anjo da Cura)',
     thumb: rafaella,
-    class: 'mago',
-    race: 'anjo',
+    class: ['mago'],
+    race: ['anjo'],
     featured: false,
     cost: 2
   },
@@ -492,8 +493,8 @@ const initialState = [
     id: uid(),
     name: 'Sanzang',
     thumb: sanzang,
-    class: 'feiticeiro',
-    race: 'oriental',
+    class: ['feiticeiro'],
+    race: ['oriental'],
     featured: true,
     cost: 4
   },
@@ -501,8 +502,8 @@ const initialState = [
     id: uid(),
     name: 'Flagelo',
     thumb: scourge,
-    class: 'cavaleiro',
-    race: 'demônio',
+    class: ['cavaleiro'],
+    race: ['demônio'],
     featured: false,
     cost: 2
   },
@@ -510,8 +511,8 @@ const initialState = [
     id: uid(),
     name: 'Serafim',
     thumb: serafim,
-    class: 'Senhor da Guerra',
-    race: 'anjo',
+    class: ['Senhor da Guerra'],
+    race: ['anjo'],
     featured: false,
     cost: 5
   },
@@ -519,8 +520,8 @@ const initialState = [
     id: uid(),
     name: 'Sereia',
     thumb: siren,
-    class: 'assassino',
-    race: 'oceânico',
+    class: ['assassino'],
+    race: ['oceânico'],
     featured: false,
     cost: 2
   },
@@ -528,8 +529,8 @@ const initialState = [
     id: uid(),
     name: 'Drone Caçador S90',
     thumb: stalkerDroneS90,
-    class: 'caçador',
-    race: 'ciborgue',
+    class: ['caçador'],
+    race: ['ciborgue'],
     featured: false,
     cost: 3
   },
@@ -537,8 +538,8 @@ const initialState = [
     id: uid(),
     name: 'Infortúnio',
     thumb: missfortune,
-    class: 'mago',
-    race: 'morto-vivo',
+    class: ['mago'],
+    race: ['morto-vivo'],
     featured: false,
     cost: 4
   },
@@ -546,8 +547,8 @@ const initialState = [
     id: uid(),
     name: 'Trombeta Estelar',
     thumb: starhorn,
-    class: 'feiticeiro',
-    race: 'fera',
+    class: ['feiticeiro'],
+    race: ['fera'],
     featured: true,
     cost: 4
   },
@@ -555,8 +556,8 @@ const initialState = [
     id: uid(),
     name: 'Punhos de Aço',
     thumb: steelfoist,
-    class: 'guerreiro',
-    race: 'ciborgue',
+    class: ['guerreiro'],
+    race: ['ciborgue'],
     featured: false,
     cost: 1
   },
@@ -564,7 +565,7 @@ const initialState = [
     id: uid(),
     name: 'Ferrão',
     thumb: stinger,
-    class: 'assassino',
+    class: ['assassino'],
     race: ['elfo', 'morto-vivo'],
     featured: false,
     cost: 3
@@ -573,8 +574,8 @@ const initialState = [
     id: uid(),
     name: 'Dançarina das Espadas',
     thumb: swordDancer,
-    class: 'assassino',
-    race: 'elfo',
+    class: ['assassino'],
+    race: ['elfo'],
     featured: false,
     cost: 5
   },
@@ -582,8 +583,8 @@ const initialState = [
     id: uid(),
     name: 'Cavaleiro Templário',
     thumb: templarKnight,
-    class: 'cavaleiro',
-    race: 'humano',
+    class: ['cavaleiro'],
+    race: ['humano'],
     featured: false,
     cost: 2
   },
@@ -591,8 +592,8 @@ const initialState = [
     id: uid(),
     name: 'O Executor',
     thumb: theExecutioner,
-    class: 'guerreiro',
-    race: 'demônio',
+    class: ['guerreiro'],
+    race: ['demônio'],
     featured: false,
     cost: 4
   },
@@ -600,8 +601,8 @@ const initialState = [
     id: uid(),
     name: 'Joey',
     thumb: joey,
-    class: 'feiticeiro',
-    race: 'ciborgue',
+    class: ['feiticeiro'],
+    race: ['ciborgue'],
     featured: false,
     cost: 5
   },
@@ -609,8 +610,8 @@ const initialState = [
     id: uid(),
     name: 'Uriella (Anjo das Chamas)',
     thumb: uriella,
-    class: 'justiceiro',
-    race: 'anjo',
+    class: ['justiceiro'],
+    race: ['anjo'],
     featured: false,
     cost: 1
   },
@@ -618,7 +619,7 @@ const initialState = [
     id: uid(),
     name: 'Peçonha',
     thumb: venom,
-    class: 'assassino',
+    class: ['assassino'],
     race: ['dragão', 'fera'],
     featured: false,
     cost: 3
@@ -627,8 +628,8 @@ const initialState = [
     id: uid(),
     name: 'Vazio: Destruição',
     thumb: voidDestruction,
-    class: 'feiticeiro',
-    race: 'vazio',
+    class: ['feiticeiro'],
+    race: ['vazio'],
     featured: false,
     cost: 3
   },
@@ -636,8 +637,8 @@ const initialState = [
     id: uid(),
     name: 'Vazio: Extinção',
     thumb: voidDoom,
-    class: 'mago',
-    race: 'vazio',
+    class: ['mago'],
+    race: ['vazio'],
     featured: false,
     cost: 5
   },
@@ -645,8 +646,8 @@ const initialState = [
     id: uid(),
     name: 'Goblin Voodoo',
     thumb: voodooElder,
-    class: 'mago',
-    race: 'goblin',
+    class: ['mago'],
+    race: ['goblin'],
     featured: false,
     cost: 2
   },
@@ -654,8 +655,8 @@ const initialState = [
     id: uid(),
     name: 'Destruidora',
     thumb: warMachine,
-    class: 'protetor',
-    race: 'ciborgue',
+    class: ['protetor'],
+    race: ['ciborgue'],
     featured: true,
     cost: 5
   },
@@ -663,7 +664,7 @@ const initialState = [
     id: uid(),
     name: 'Lobisomem',
     thumb: werewolf,
-    class: 'guerreiro',
+    class: ['guerreiro'],
     race: ['humano', 'fera'],
     featured: true,
     cost: 3
@@ -673,7 +674,7 @@ const initialState = [
     name: 'Doutor Bruxo',
     thumb: witchDoctor,
     class: ['invocador', 'druida'],
-    race: 'fera',
+    race: ['fera'],
     featured: true,
     cost: 1
   },
@@ -681,8 +682,8 @@ const initialState = [
     id: uid(),
     name: 'Lobo Amazona',
     thumb: wolfCavalier,
-    class: 'cavaleiro',
-    race: 'elfo',
+    class: ['cavaleiro'],
+    race: ['elfo'],
     featured: false,
     cost: 2
   },
@@ -690,8 +691,8 @@ const initialState = [
     id: uid(),
     name: 'Wujing',
     thumb: wujing,
-    class: 'caçador',
-    race: 'oriental',
+    class: ['caçador'],
+    race: ['oriental'],
     featured: false,
     cost: 2
   },
@@ -699,8 +700,8 @@ const initialState = [
     id: uid(),
     name: 'Wukong',
     thumb: wukong,
-    class: 'guerreiro',
-    race: 'oriental',
+    class: ['guerreiro'],
+    race: ['oriental'],
     featured: true,
     cost: 4
   },
@@ -708,19 +709,19 @@ const initialState = [
     id: uid(),
     name: 'Zeus',
     thumb: zeus,
-    class: 'guerreiro',
-    race: 'olimpiano',
+    class: ['guerreiro'],
+    race: ['olimpiano'],
     featured: false,
     cost: 5
   }
 ]
 
-const HeroesContext = createContext();
+const HeroesContext = createContext<HeroesData>({} as HeroesData);
 
-const HeroesProvider = ({ children }) => {
+const HeroesProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [ heroes, ] = useState(initialState);
 
-  const getHeroById = id => heroes.filter(hero => hero.id === id);
+  const getHeroById = (id: string) => heroes.find(hero => hero.id === id);
 
   return (
     <HeroesContext.Provider value={{ heroes, getHeroById }}>

@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 
+interface Props {
+  active: boolean;
+  multiline?: boolean;
+  on: number;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 0 0 202px;
 `;
 
-export const Trait = styled.div`
+export const TraitContainer = styled.div`
   background: #22333B;
   border: 1px solid #425C68;
   border-radius: 2px;
@@ -24,7 +31,7 @@ export const Trait = styled.div`
   }
 `;
 
-export const TraitImage = styled.img`
+export const TraitImage = styled.img<Pick<Props, 'active'>>`
   width: 36px;
   height: 36px;
   object-fit: contain;
@@ -51,7 +58,7 @@ export const TraitContent = styled.div`
   pointer-events: none;
 `;
 
-export const TraitName = styled.p`
+export const TraitName = styled.p<Pick<Props, 'active'>>`
   color: ${props => props.active ? '#fff' : '#B0B0B0'};
   pointer-events: none;
 `;
@@ -123,7 +130,7 @@ export const PopupStages = styled.div`
   margin: 16px 0;
 `;
 
-export const Stage = styled.div`
+export const Stage = styled.div<Pick<Props, 'active' | 'multiline'>>`
   display: flex;
   align-items: ${props => props.multiline ? 'flex-start' : 'center'};
   margin-bottom: 8px;
@@ -161,4 +168,41 @@ export const StageNumber = styled.p`
 export const StageDescription = styled.p`
   color: #fff;
   flex: 1;
+`;
+
+export const TraitsSwitchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  cursor: pointer;
+`;
+
+export const TraitsSwitchText = styled.p`
+  color: #fff;
+  flex: 1;
+`;
+
+export const TraitsSwitch = styled.div<Pick<Props, 'on'>>`
+  position: relative;
+  width: 40px;
+  height: 20px;
+  border-radius: 30px;
+  background: ${props => props.on ? '#0087C2' : '#425C68'};
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  transition: all .15s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: ${props => props.on ? '#fff' : '#a7bec9'};
+    border-radius: 50%;
+    left: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    transition: all .3s cubic-bezier(.785,.135,.15,.86);
+    transform: ${props => props.on ? 'translateX(20px)' : 'translateX(0)'};
+  }
 `;

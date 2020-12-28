@@ -4,7 +4,7 @@ import useTeam from '../../context/TeamContext';
 
 import { Container, BtnClearTeam, BtnShare } from './styles';
 
-const Aside = () => {
+const Aside: React.FC = () => {
   const { clearTeam } = useTeam();
 
   return (

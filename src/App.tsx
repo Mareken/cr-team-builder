@@ -39,7 +39,7 @@ const Center = styled.div`
   }
 `;
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <Header />

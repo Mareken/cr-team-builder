@@ -1,24 +1,40 @@
 import React from 'react';
 
-import { useDrop } from 'react-dnd';
+import { DropTargetMonitor, useDrop, DragObjectWithType } from 'react-dnd';
 
 import useTeam from '../../context/TeamContext';
-import { ItemTypes } from '../../utils/types';
+import { ItemTypes, Hero } from '../../utils/types';
 import HeroTile from '../HeroTile';
 
 import { Container } from './styles';
 
-const BoardTile = ({ hero, index }) => {
+interface BoardTileProps {
+  hero: Hero;
+  index: number;
+  isOver?: boolean;
+}
+
+interface DragType extends DragObjectWithType {
+  hero: Hero;
+  onBoard: boolean;
+  position: number;
+}
+
+interface MonitorType extends DropTargetMonitor {
+  targetId?: string;
+}
+
+const BoardTile: React.FC<BoardTileProps> = ({ hero, index }) => {
   const { addHero, swapPositions } = useTeam();
 
   const [{ isOver }, drop ] = useDrop({
     accept: ItemTypes.TILE,
-    drop: (item, monitor) => {
+    drop: (item: DragType, monitor: MonitorType) => {
       if (item.onBoard) {
-        swapPositions(item.hero.id, parseInt(monitor.targetId.replace( /^\D+/g, '')));
+        swapPositions(item.position, parseInt(monitor.targetId!.replace( /^\D+/g, '')));
       }
       else {
-        addHero(item.hero, parseInt(monitor.targetId.replace( /^\D+/g, '')));
+        addHero(item.hero, parseInt(monitor.targetId!.replace( /^\D+/g, '')));
       }
     },
     collect: monitor => ({

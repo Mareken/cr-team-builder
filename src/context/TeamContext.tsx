@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { Hero, TeamData } from '../utils/types';
 
-const TeamContext = createContext();
+const TeamContext = createContext<TeamData>({} as TeamData);
 
-const TeamProvider = ({ children }) => {
+const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [ team, setTeam ] = useState(Array(32).fill(''));
 
-  const addHero = (hero, position) => {
+  const addHero = (hero: Hero, position: number | undefined) => {
     const curr = [ ...team ];
 
     if (curr.every(item => item)) return;
@@ -39,18 +40,25 @@ const TeamProvider = ({ children }) => {
     setTeam(curr);
   };
 
-  const removeHero = (hero, index) => {
+  const removeHero = (hero: Hero, index: number) => {
     const curr = [ ...team ];
-    const pos = team.filter(item => item && item.hero.id === hero.id && item.position === index)[0].position;
-
+    const pos = team.findIndex(item => item.position === index && item.hero.id === hero.id);
+    
     curr[pos] = '';
 
     setTeam(curr);
   }
 
-  const swapPositions = (id, finalPos) => {
+  const swapPositions = (initialPos: number, finalPos: number) => {
+    if (initialPos === finalPos) return;
+    
     const curr = [ ...team ];
-    const initialPos = curr.filter(item => item && item.hero.id === id)[0].position;
+    
+    curr[initialPos].position = finalPos;
+
+    if (curr[finalPos]) {
+      curr[finalPos].position = initialPos;
+    }
     
     [ curr[initialPos], curr[finalPos] ] = [ curr[finalPos], curr[initialPos] ];
     

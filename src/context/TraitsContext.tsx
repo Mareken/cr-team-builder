@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, PropsWithChildren } from 'react';
 import { uid } from '../utils/helpers';
+import { TraitsData } from '../utils/types';
 
 import angel from '../assets/images/traits/angel_icon.png';
 import assassin from '../assets/images/traits/assassin_icon.png';
@@ -305,12 +306,12 @@ const initialState = [
   }
 ]
 
-const TraitsContext = createContext();
+const TraitsContext = createContext<TraitsData>({} as TraitsData);
 
-const TraitsProvider = ({ children }) => {
+const TraitsProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [ traits, ] = useState(initialState);
 
-  const getTraitByName = name => traits.filter(trait => trait.name.toLowerCase() === name.toLowerCase())[0];
+  const getTraitByName = (name: string) => traits.find(trait => trait.name.toLowerCase() === name.toLowerCase());
 
   return (
     <TraitsContext.Provider value={{ traits, getTraitByName }}>
