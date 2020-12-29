@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ContentLoader from 'react-content-loader'
 import useTeam from '../../context/TeamContext';
 import useTraits from '../../context/TraitsContext';
+import useSearch from '../../context/SearchContext';
 import { Trait } from '../../utils/types';
 
 
@@ -18,6 +19,7 @@ interface ReducedObj {
 const Traits: React.FC<TraitsProps> = () => {
   const { team } = useTeam();
   const { getTraitByName } = useTraits();
+  const { searchValue, setSearchValue } = useSearch();
   const [ teamTraits, setTeamTraits ] = useState<Trait[]>([]);
   const [ hidePartials, setHidePartials ] = useState(false);
 
@@ -82,6 +84,15 @@ const Traits: React.FC<TraitsProps> = () => {
     }
   }
 
+  const handleSetSearchValue = (name: string) => {
+    if (name === searchValue) {
+      setSearchValue('');
+    }
+    else {
+      setSearchValue(name);
+    }
+  }
+
   return (
     <Container>
       {
@@ -98,7 +109,10 @@ const Traits: React.FC<TraitsProps> = () => {
             const active = trait.curr >= trait.stagesCount[0];
   
             return (
-              <TraitContainer key={trait.id}>
+              <TraitContainer
+                key={trait.id}
+                onClick={() => handleSetSearchValue(trait.name)}
+              >
                 {
                   trait.icon ? (
                     <TraitImage
