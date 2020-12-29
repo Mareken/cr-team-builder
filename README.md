@@ -13,7 +13,7 @@ For styling, the choice was styled-components 💅
 
 ## To Do
 
-- [ ] Add level to heroes (1, 2, 3 stars)
+- [x] Add level to heroes (1, 2, 3 stars)
 - [ ] Add items
 - [ ] Show the team cost (total)
 - [ ] Better tooltips when hovering over a hero
