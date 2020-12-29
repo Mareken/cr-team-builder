@@ -8,8 +8,8 @@ A simple yet effective team builder for the popular mobile game Chess Rush, by T
 
 ## Technologies
 
-This project was created using [create-react-app](https://github.com/facebook/create-react-app). Since it's not a big and complex project, the Context API from React for global state management was the go to.
-For styling, the choice was styled-components.
+This project was bootstraped with ⚛️ [create-react-app](https://github.com/facebook/create-react-app). Although it's now full TypeScript, initially the project was JavaScript, and later migrated to TS. Since it's not a big and complex project, the Context API from React for global state management was the go to option.
+For styling, the choice was styled-components 💅
 
 ## To Do
 
