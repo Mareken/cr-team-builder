@@ -10,9 +10,6 @@ import { ItemTypes, Hero } from '../../utils/types';
 import HeroTile from '../HeroTile';
 
 import { Container, Header, LeftSide, OrderBtn, RightSide, SearchInput, Grid } from './styles';
-interface HeroesGridProps {
-  isOver?: boolean;
-}
 
 interface DragType extends DragObjectWithType {
   hero: Hero;
@@ -20,7 +17,7 @@ interface DragType extends DragObjectWithType {
   position: number;
 }
 
-const HeroesGrid: React.FC<HeroesGridProps> = () => {
+const HeroesGrid: React.FC = () => {
   const { heroes } = useHeroes();
   const { searchValue, setSearchValue } = useSearch();
 
@@ -50,7 +47,7 @@ const HeroesGrid: React.FC<HeroesGridProps> = () => {
   }
 
   const formatBeforeCompare = (value: string) => {
-    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {

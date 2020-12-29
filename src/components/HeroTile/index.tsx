@@ -48,6 +48,7 @@ const HeroTile: React.FC<HeroTileProps> = ({ hero, onBoard = false, index }) => 
       board={onBoard}
       onClick={handleAddHero}
       onContextMenu={handleRemoveHero}
+      onDoubleClick={handleRemoveHero}
     >
       <Thumb bg={hero.thumb} isSvg={hero.thumb.includes('.svg')} />
 

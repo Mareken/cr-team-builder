@@ -9,19 +9,21 @@ import { Trait } from '../../utils/types';
 
 import { Container, TraitContainer, TraitImage, TraitBadgeNumber, TraitContent, TraitName, TraitRatio, EmptyState, EmptyStateText, Popup, PopupTitle, PopupDescriptionPre, PopupDescriptionAfter, PopupStages, Stage, StageNumber, StageDescription, TraitsSwitchContainer, TraitsSwitch, TraitsSwitchText } from './styles';
 
-interface TraitsProps {
-  trait?: Trait;
-}
-
 interface ReducedObj {
   [key: string]: number
 }
-const Traits: React.FC<TraitsProps> = () => {
+const Traits: React.FC = () => {
   const { team } = useTeam();
   const { getTraitByName } = useTraits();
   const { searchValue, setSearchValue } = useSearch();
   const [ teamTraits, setTeamTraits ] = useState<Trait[]>([]);
   const [ hidePartials, setHidePartials ] = useState(false);
+
+  useEffect(() => {
+    if (teamTraits.length === 0) {
+      setSearchValue('');
+    };
+  }, [teamTraits.length, setSearchValue]);
 
   useEffect(() => {
     if (team.length === 0 && teamTraits.length === 0) return;
