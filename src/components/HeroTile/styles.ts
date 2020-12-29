@@ -7,7 +7,61 @@ interface Props {
   board: boolean;
   isSvg: boolean;
   bg: string;
+  level: number;
 }
+
+export const LevelContainer = styled.div<Pick<Props, 'level'>>`
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 50%;  
+  transform: translate(-50%, -65%);
+  width: 100%;
+  opacity: 1;
+  pointer-events: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: ${props => props.level > 1 ? 1 : 0};
+
+  > div {
+    align-self: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+
+    > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none !important;
+
+      > span {
+        text-shadow: 0 2px 5px rgba(0,0,0,.8);
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+        padding: 0 3px;
+        flex: 1;
+        pointer-events: ${props => props.level > 1 ? 'auto' : 'none'} !important;
+
+        &:first-of-type {
+          transform: translateX(3px);
+        }
+
+        &:last-of-type {
+          transform: translateX(-3px);
+        }
+      }
+    }
+  }
+`;
 
 export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   height: 70px;
@@ -23,6 +77,16 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   position: relative;
   transform: ${props => props.board ? 'translateY(-2px) scaleX(1.05)' : 'none'};
 
+  &:hover {
+    ${LevelContainer} {
+      opacity: 1;
+
+      > div > div > span {
+        pointer-events: auto !important;
+      }
+    }
+  }
+
   @media screen and (max-width: 1200px) {
     height: 50px;
   }
@@ -30,9 +94,9 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
 
 export const FeaturedBadge = styled.div<Pick<Props, 'cost'>>`
   position: absolute;
-  top: -1px;
+  bottom: -2px;
   right: -1px;
-  border-radius: 0 2px 0 2px;
+  border-radius: 2px 0 0 2px;
   background: ${props => colors[props.cost - 1]};
   display: flex;
   align-items: center;

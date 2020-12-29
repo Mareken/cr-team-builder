@@ -44,7 +44,8 @@ export interface Team {
 export interface TeamData {
   team: Team[];
   addHero: (hero: Hero, position?: number) => void;
-  removeHero: (hero: Hero, index: number) => void;
+  removeHero: (hero: Hero, position: number) => void;
   swapPositions: (id: number, finalPos: number) => void;
   clearTeam: () => void;
+  changeHeroLevel: (position: number, level: number) => void;
 }

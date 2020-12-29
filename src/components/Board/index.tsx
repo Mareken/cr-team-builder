@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Team } from '../../utils/types';
 import useTeam from '../../context/TeamContext'; 
@@ -8,6 +8,10 @@ import { Container } from './styles';
 
 const Board: React.FC = () => {
   const { team } = useTeam();
+
+  useEffect(() => {
+    console.log(team);
+  }, [team]);
 
   return (
     <Container>

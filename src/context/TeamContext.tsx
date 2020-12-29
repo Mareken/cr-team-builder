@@ -40,9 +40,9 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
     setTeam(curr);
   };
 
-  const removeHero = (hero: Hero, index: number) => {
+  const removeHero = (hero: Hero, position: number) => {
     const curr = [ ...team ];
-    const pos = team.findIndex(item => item.position === index && item.hero.id === hero.id);
+    const pos = team.findIndex(item => item.position === position && item.hero.id === hero.id);
     
     curr[pos] = '';
 
@@ -69,8 +69,20 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
     setTeam(Array(32).fill(''));
   }
 
+  const changeHeroLevel = (position: number, level: number) => {
+    const curr = [ ...team ];
+    const pos = team.findIndex(item => item.position === position);
+    
+    curr[pos] = {
+      ...curr[pos],
+      level
+    }
+
+    setTeam(curr);
+  }
+
   return (
-    <TeamContext.Provider value={{ team, addHero, removeHero, clearTeam, swapPositions }}>
+    <TeamContext.Provider value={{ team, addHero, removeHero, clearTeam, swapPositions, changeHeroLevel }}>
       { children }
     </TeamContext.Provider>
   )

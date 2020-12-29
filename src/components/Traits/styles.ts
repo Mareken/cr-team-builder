@@ -90,7 +90,7 @@ export const Popup = styled.div`
   border-radius: 2px;
   width: 400px;
   padding: 16px;
-  border: 2px solid #425C68;
+  border: 1px solid #425C68;
   z-index: 15;
   cursor: default;
   opacity: 0;
@@ -103,7 +103,7 @@ export const Popup = styled.div`
     top: 48px;
     left: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background: #425C68;
   }
 `;
