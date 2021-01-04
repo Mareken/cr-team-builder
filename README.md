@@ -17,7 +17,6 @@ For styling, the choice was styled-components 💅
 - [ ] Add items
 - [ ] Show the team cost (total)
 - [ ] Better tooltips when hovering over a hero
-- [ ] Add trait icons above hero on board
 
 ## Contributing
 
