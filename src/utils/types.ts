@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 export const ItemTypes = {
 	TILE: 'tile',
 };
@@ -48,4 +50,10 @@ export interface TeamData {
   swapPositions: (id: number, finalPos: number) => void;
   clearTeam: () => void;
   changeHeroLevel: (position: number, level: number) => void;
+}
+
+export interface AuthData {
+  currentUser?: firebase.User | null;
+  signup: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
+  login: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
 }

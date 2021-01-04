@@ -7,20 +7,23 @@ import { TraitsProvider } from './context/TraitsContext';
 import { TeamProvider } from './context/TeamContext';
 import { HeroesProvider } from './context/HeroesContext';
 import { SearchProvider } from './context/SearchContext';
+import { AuthProvider } from './context/AuthContext';
 
 import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TraitsProvider>
-      <SearchProvider>
-        <HeroesProvider>
-          <TeamProvider>
-            <App />
-          </TeamProvider>
-        </HeroesProvider>
-      </SearchProvider>
-    </TraitsProvider>
+    <AuthProvider>
+      <TraitsProvider>
+        <SearchProvider>
+          <HeroesProvider>
+            <TeamProvider>
+              <App />
+            </TeamProvider>
+          </HeroesProvider>
+        </SearchProvider>
+      </TraitsProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -3,16 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: center;
-
-  @media screen and (min-width: 360px) {
-    position: absolute;
-    right: 40px;
-    top: 10px;
-  }
-
-  @media screen and (min-width: 1024px) {
-    position: initial;
-  }
 `;
 
 export const BtnClearTeam = styled.button`
@@ -21,7 +11,7 @@ export const BtnClearTeam = styled.button`
   width: 130px;
   height: 40px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-right: 8px;
   cursor: pointer;
   transition: all .15s ease;
@@ -45,7 +35,7 @@ export const BtnShare = styled.button`
   width: 130px;
   height: 40px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all .15s ease;
 
@@ -66,7 +56,7 @@ export const Dialog = styled.div`
   background: #0A0908;
   padding: 24px 16px 16px 24px;
   width: 300px;
-  border-radius: 5px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -80,7 +70,7 @@ export const DialogTitle = styled.p`
 `;
 
 export const DialogText = styled.p`
-  color: #B0B0B0;
+  color: #b1bec7;
   margin: 8px 0;
 `;
 
@@ -97,7 +87,7 @@ export const DialogBtn = styled.button`
   text-transform: uppercase;
   color: #0087C2;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 
   &:hover {

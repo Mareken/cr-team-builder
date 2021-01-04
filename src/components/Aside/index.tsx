@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useTeam from '../../context/TeamContext';
 
@@ -6,19 +6,36 @@ import { Container, BtnClearTeam, BtnShare, Dialog, DialogTitle, DialogText, Dia
 
 const Aside: React.FC = () => {
   const { clearTeam } = useTeam();
-  const [ dialogOpen, setDialogOpen ] = useState(true);
+  const [ dialogOpen, setDialogOpen ] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (evt: KeyboardEvent) => {
+      if (evt.key === 'Escape' && document.querySelector('.dialog.open')) {
+        closeDialog();
+      }
+    }
+
+    const handleScroll = () => {
+      if (document.querySelector('.dialog.open')) {
+        closeDialog();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('scroll', handleScroll, { passive: true, capture: false });
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
 
   const openDialog = () => {
     setDialogOpen(true);
-    document.body.style.overflowY = 'hidden';
   }
 
   const closeDialog = () => {
     setDialogOpen(false);
-
-    setTimeout(() => {
-      document.body.style.overflowY = 'auto';
-    }, 150);
   }
 
   return (

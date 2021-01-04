@@ -28,12 +28,12 @@ export const LeftSide = styled.div`
 `;
 
 export const OrderBtn = styled.button<Props>`
-  border-radius: 5px;
+  border-radius: 4px;
   border: none;
   background: ${props => props.selected ? '#0087C2' : '#22333B'};
   padding: 0 12px;
   height: 30px;
-  color: ${props => props.selected ? '#fff' : '#B0B0B0'};
+  color: ${props => props.selected ? '#fff' : '#b1bec7'};
   margin-left: 8px;
   cursor: pointer;
   transition: all .15s ease;

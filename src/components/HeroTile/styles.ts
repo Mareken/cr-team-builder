@@ -19,7 +19,7 @@ export const LevelContainer = styled.div<Pick<Props, 'level'>>`
   width: 100%;
   opacity: 1;
   pointer-events: none;
-  border-radius: 5px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +66,7 @@ export const LevelContainer = styled.div<Pick<Props, 'level'>>`
 export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   height: 70px;
   border: 2px solid transparent;
-  border-radius: 2px;
+  border-radius: 4px;
   background: #344852;
   cursor: pointer;
   border-color: ${props => colors[props.cost - 1]};
@@ -96,7 +96,7 @@ export const FeaturedBadge = styled.div<Pick<Props, 'cost'>>`
   position: absolute;
   bottom: -2px;
   right: -1px;
-  border-radius: 2px 0 0 2px;
+  border-radius: 4px 0 0 2px;
   background: ${props => colors[props.cost - 1]};
   display: flex;
   align-items: center;

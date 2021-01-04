@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const TraitContainer = styled.div`
   background: #22333B;
   border: 1px solid #425C68;
-  border-radius: 2px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -49,7 +49,7 @@ export const TraitBadgeNumber = styled.p`
   align-items: center;
   justify-content: center;
   background: #425C68;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-right: 8px;
   pointer-events: none;
 `;
@@ -59,7 +59,7 @@ export const TraitContent = styled.div`
 `;
 
 export const TraitName = styled.p<Pick<Props, 'active'>>`
-  color: ${props => props.active ? '#fff' : '#B0B0B0'};
+  color: ${props => props.active ? '#fff' : '#b1bec7'};
   pointer-events: none;
 `;
 
@@ -75,11 +75,11 @@ export const EmptyState = styled.div`
   text-align: center;
   background: #22333B;
   border: 1px solid #425C68;
-  border-radius: 2px;
+  border-radius: 4px;
 `;
 
 export const EmptyStateText = styled.p`
-  color: #B0B0B0;
+  color: #b1bec7;
 `;
 
 export const Popup = styled.div`
@@ -87,7 +87,7 @@ export const Popup = styled.div`
   right: -405px;
   top: 0;
   background: #344852;
-  border-radius: 2px;
+  border-radius: 4px;
   width: 400px;
   padding: 16px;
   border: 1px solid #425C68;
@@ -142,11 +142,11 @@ export const Stage = styled.div<Pick<Props, 'active' | 'multiline'>>`
   > p {
     &:first-of-type {
       background: ${props => props.active ? '#0087C2' : '#344852'};
-      border-color: ${props => props.active ? '#0087C2' : '#B0B0B0'};
+      border-color: ${props => props.active ? '#0087C2' : '#b1bec7'};
     }
 
     &:last-of-type {
-      color: ${props => props.active ? '#fff' : '#B0B0B0'};
+      color: ${props => props.active ? '#fff' : '#b1bec7'};
       font-family: ${props => props.active ? 'SpaceGrotesk Bold' : 'inherit'};
     }
   }

@@ -24,7 +24,6 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
   width: 100%;
   font-family: 'SpaceGrotesk Regular', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,17 +31,18 @@ body {
   font-size: 16px;
   background: #0A0908;
   overflow-x: hidden;
+  position: relative;
 }
 
 
 body::-webkit-scrollbar {
-  width: 5px;
-  border-radius: 3px;
+  width: 4px;
+  border-radius: 4px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #22333B;
-  border-radius: 3px;
+  background: #344852;
+  border-radius: 4px;
 }
 
 body::-webkit-scrollbar-track {
@@ -57,10 +57,13 @@ a {
   text-decoration: none;
 }
 
-input, textarea, button {
+input, textarea, button, select, option {
   font-family: 'SpaceGrotesk Regular', Arial, Helvetica, sans-serif;
   font-size: 1rem;
   border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 input:focus,
@@ -84,4 +87,9 @@ p, span, h1, h2, h3, h4, h5, h6 {
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
 }
