@@ -2,45 +2,59 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  flex: 0 0 202px;
 `;
 
 export const BtnClearTeam = styled.button`
   color: #fff;
   border: 1px solid #344852;
-  width: 130px;
+  width: 150px;
   height: 40px;
   text-align: center;
   border-radius: 4px;
-  margin-right: 8px;
+  margin-bottom: 16px;
   cursor: pointer;
   transition: all .15s ease;
+  background: transparent;
 
   &:hover {
     border-color: #0087C2;
   }
+`;
 
-  @media screen and (min-width: 360px) {
+export const BtnSaveTeam = styled.button`
+  color: #fff;
+  background: #344852;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .15s ease;
+  margin-bottom: 16px;
+  border: 1px solid #344852;
+
+  &:hover {
     background: #22333B;
-  }
-
-  @media screen and (min-width: 1024px) {
-    background: #0A0908;
+    border-color: #22333B;
   }
 `;
 
 export const BtnShare = styled.button`
   color: #fff;
   background: #0087C2;
-  width: 130px;
+  width: 150px;
   height: 40px;
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
   transition: all .15s ease;
+  border: 1px solid #0087C2;
 
   &:hover {
     background: #006A98;
+    border-color: #006A98;
   }
 `;
 

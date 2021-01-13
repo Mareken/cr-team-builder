@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
-import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot } from './styles';
+import { signInWithGoogle } from '../../firebase';
+import googleIcon from '../../assets/images/google_icon.svg';
+
+import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText } from './styles';
 
 const Login: React.FC = () => {
   const { login } = useAuth();
@@ -89,6 +92,13 @@ const Login: React.FC = () => {
             ) : 'Entrar' }
           </BtnSend>
         </Form>
+
+        <HrLine />
+
+        <BtnGoogleLogin onClick={signInWithGoogle}>
+          <GoogleLogo src={googleIcon} />
+          <BtnGoogleLoginText>Entrar com Google</BtnGoogleLoginText>
+        </BtnGoogleLogin>
 
         <FooterText>Ainda não tem uma conta? <Link to='/signup'>Criar agora</Link></FooterText>
       </FormContainer>

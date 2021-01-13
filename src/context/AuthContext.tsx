@@ -17,6 +17,10 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
+  const signout = () => {
+    return auth.signOut();
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
@@ -27,7 +31,7 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login }}>
+    <AuthContext.Provider value={{ currentUser, signup, login, signout }}>
       { !loading && children }
     </AuthContext.Provider>
   )

@@ -159,3 +159,43 @@ export const Dot = styled.div`
     animation-delay: .2s;
   }
 `;
+
+export const HrLine = styled.div`
+  width: 100%;
+  height: .5px;
+  background: #4f636e;
+  border-radius: 1px;
+`;
+
+export const BtnGoogleLogin = styled.button`
+  background: #4385F5;
+  border-radius: 5px;
+  height: 45px;
+  cursor: pointer;
+  transition: all .15s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 32px 0;
+
+  &:hover {
+    background: #3775de;
+  }
+`;
+
+export const GoogleLogo = styled.img`
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  margin-right: 8px;
+  border-radius: 4px;
+  background: #fff;
+  padding: 8px;
+`;
+
+export const BtnGoogleLoginText = styled.p`
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  transform: translateX(-15px);
+`;

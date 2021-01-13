@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
-import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot } from './styles';
+import { signInWithGoogle } from '../../firebase';
+import googleIcon from '../../assets/images/google_icon.svg';
+
+import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText } from './styles';
 
 const Signup: React.FC = () => {
   const { signup } = useAuth();
@@ -88,6 +91,13 @@ const Signup: React.FC = () => {
             ) : 'Criar conta' }
           </BtnSend>
         </Form>
+
+        <HrLine />
+
+        <BtnGoogleLogin onClick={signInWithGoogle}>
+          <GoogleLogo src={googleIcon} />
+          <BtnGoogleLoginText>Criar conta com Google</BtnGoogleLoginText>
+        </BtnGoogleLogin>
 
         <FooterText>Já tem uma conta? <Link to='/login'>Entre aqui</Link></FooterText>
       </FormContainer>

@@ -56,4 +56,5 @@ export interface AuthData {
   currentUser?: firebase.User | null;
   signup: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
   login: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
+  signout: () => void;
 }

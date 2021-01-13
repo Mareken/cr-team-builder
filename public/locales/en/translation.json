@@ -1,4 +1,13 @@
 {
   "login.alert": "Log in to save your composition",
-  "copyrightMessage": "CR Team Builder isn’t endorsed by Tencent Games and doesn’t reflect the views or opinions of Tencent Games or anyone officially involved in producing or managing Chess Rush. Chess Rush and Tencent Games are trademarks or registered trademarks of Tencent Games, Inc. Chess Rush © Tencent Games, Inc."
+  "copyrightMessage": "CR Team Builder isn’t endorsed by Tencent Games and doesn’t reflect the views or opinions of Tencent Games or anyone officially involved in producing or managing Chess Rush. Chess Rush and Tencent Games are trademarks or registered trademarks of Tencent Games, Inc. Chess Rush © Tencent Games, Inc.",
+  "subheader.tabOne": "Team builder",
+  "subheader.tabTwo": "My comps",
+  "register": "Register",
+  "login": "Login",
+  "aside.clearTeam": "Clear team",
+  "aside.saveTeam": "Save team",
+  "aside.share": "Share",
+  "popup.changePic": "Change image",
+  "popup.logout": "Logout"
 }

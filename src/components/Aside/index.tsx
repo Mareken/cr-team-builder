@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import useTeam from '../../context/TeamContext';
+import useAuth from '../../context/AuthContext';
 
-import { Container, BtnClearTeam, BtnShare, Dialog, DialogTitle, DialogText, DialogFooter, DialogBtn, DialogContainer, DialogOverlay } from './styles';
+import { Container, BtnClearTeam, BtnSaveTeam, BtnShare, Dialog, DialogTitle, DialogText, DialogFooter, DialogBtn, DialogContainer, DialogOverlay } from './styles';
 
 const Aside: React.FC = () => {
   const { clearTeam } = useTeam();
+  const { currentUser } = useAuth();
+  const { t } = useTranslation();
   const [ dialogOpen, setDialogOpen ] = useState(false);
 
   useEffect(() => {
@@ -40,8 +44,9 @@ const Aside: React.FC = () => {
 
   return (
     <Container>
-      <BtnClearTeam onClick={clearTeam}>Limpar Time</BtnClearTeam>
-      <BtnShare onClick={openDialog}>Compartilhar</BtnShare>
+      <BtnClearTeam onClick={clearTeam}>{t('aside.clearTeam')}</BtnClearTeam>
+      { currentUser && <BtnSaveTeam>{t('aside.saveTeam')}</BtnSaveTeam> }
+      <BtnShare onClick={openDialog}>{t('aside.share')}</BtnShare>
 
       <DialogContainer className={dialogOpen ? 'dialog open' : 'dialog'}>
         <DialogOverlay onClick={closeDialog} />
