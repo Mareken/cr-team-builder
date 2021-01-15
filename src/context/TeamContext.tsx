@@ -1,18 +1,23 @@
 import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
+
+import { firestore, timestamp } from '../firebase';
+import { uid } from '../utils/helpers';
 import { Hero, TeamData } from '../utils/types';
 
 const TeamContext = createContext<TeamData>({} as TeamData);
 
 const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [ team, setTeam ] = useState(Array(32).fill(''));
+  const [ team, setTeam ] = useState({ id: uid(), comp: Array(32).fill('') });
+  const [ loading, setLoading ] = useState(false);
+  const [ error, setError ] = useState('');
 
   const addHero = (hero: Hero, position: number | undefined) => {
-    const curr = [ ...team ];
+    const { comp } = { ...team };
 
-    if (curr.every(item => item)) return;
+    if (comp.every(item => item)) return;
 
     if (position) {
-      curr[position] = {
+      comp[position] = {
         hero: hero,
         position: position,
         items: [],
@@ -20,9 +25,9 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
       };
     }
     else {
-      curr.some((item, index) => {
+      comp.some((item, index) => {
         if (!item) {
-          curr[index] = {
+          comp[index] = {
             hero: hero,
             position: index,
             items: [],
@@ -37,52 +42,113 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
       });
     }
     
-    setTeam(curr);
+    setTeam({ ...team, comp });
   };
 
   const removeHero = (hero: Hero, position: number) => {
-    const curr = [ ...team ];
-    const pos = team.findIndex(item => item.position === position && item.hero.id === hero.id);
+    const { comp } = { ...team };
+    const pos = comp.findIndex(item => item.position === position && item.hero.id === hero.id);
     
-    curr[pos] = '';
+    comp[pos] = '';
 
-    setTeam(curr);
+    setTeam({ ...team, comp });
   }
 
   const swapPositions = (initialPos: number, finalPos: number) => {
     if (initialPos === finalPos) return;
     
-    const curr = [ ...team ];
+    const { comp } = { ...team };
     
-    curr[initialPos].position = finalPos;
+    comp[initialPos].position = finalPos;
 
-    if (curr[finalPos]) {
-      curr[finalPos].position = initialPos;
+    if (comp[finalPos]) {
+      comp[finalPos].position = initialPos;
     }
     
-    [ curr[initialPos], curr[finalPos] ] = [ curr[finalPos], curr[initialPos] ];
+    [ comp[initialPos], comp[finalPos] ] = [ comp[finalPos], comp[initialPos] ];
     
-    setTeam(curr);
+    setTeam({ ...team, comp });
   };
 
   const clearTeam = () => {
-    setTeam(Array(32).fill(''));
+    setTeam({ ...team, comp: Array(32).fill('') });
+  }
+
+  const saveTeam = async (userId: string) => {
+    if (team.comp.some(item => item)) {
+      setLoading(true);
+
+      const userRef = firestore.collection(`users/${userId}/teams`).doc(team.id);
+      const status = await userRef.get();
+
+      if (status.exists) {
+        try {
+          await userRef.update({
+            comp: team.comp,
+            updatedAt: timestamp()
+          });
+  
+          console.log('Documento atualizado');
+          
+          setLoading(false);
+          setError('');
+        }
+        catch (err) {
+          console.error(`Erro ao atualizar time ${err}`);
+        }
+      }
+      else {
+        try {
+          await userRef.set({
+            teamId: team.id,
+            comp: team.comp,
+            createdAt: timestamp()
+          });
+  
+          console.log('Documento criado');
+          
+          setLoading(false);
+          setError('');
+        }
+        catch (err) {
+          console.error(`Erro ao atualizar time ${err}`);
+        }
+      }
+    }
+  }
+
+  const fetchTeam = async (userId: string, teamId: string) => {
+    const userRef = firestore.collection(`users/${userId}/teams`).doc(teamId);
+
+    const status = await userRef.get();
+
+    if (status.exists) {
+      setTeam({
+        id: teamId,
+        comp: status.data()!.comp
+      })
+
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   const changeHeroLevel = (position: number, level: number) => {
-    const curr = [ ...team ];
-    const pos = team.findIndex(item => item.position === position);
+    const { comp } = { ...team };
+    const pos = comp.findIndex(item => item.position === position);
     
-    curr[pos] = {
-      ...curr[pos],
+    comp[pos] = {
+      ...comp[pos],
       level
     }
 
-    setTeam(curr);
+    setTeam({ ...team, comp });
   }
 
   return (
-    <TeamContext.Provider value={{ team, addHero, removeHero, clearTeam, swapPositions, changeHeroLevel }}>
+    <TeamContext.Provider value={{ team, loading, error, addHero, removeHero, clearTeam, saveTeam, fetchTeam, swapPositions, changeHeroLevel }}>
       { children }
     </TeamContext.Provider>
   )

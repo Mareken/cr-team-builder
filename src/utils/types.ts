@@ -44,11 +44,15 @@ export interface Team {
 }
 
 export interface TeamData {
-  team: Team[];
+  team: { id: string, comp: Team[] };
+  loading: boolean;
+  error: string;
   addHero: (hero: Hero, position?: number) => void;
   removeHero: (hero: Hero, position: number) => void;
   swapPositions: (id: number, finalPos: number) => void;
   clearTeam: () => void;
+  saveTeam: (userId: string) => void;
+  fetchTeam: (userId: string, teamId: string) => Promise<boolean>;
   changeHeroLevel: (position: number, level: number) => void;
 }
 
@@ -56,5 +60,6 @@ export interface AuthData {
   currentUser?: firebase.User | null;
   signup: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
   login: (email: string, password: string) => Promise<firebase.auth.UserCredential>;
+  fetchTeamsOfCurrentUser: () => Promise<undefined | firebase.firestore.DocumentData[]>;
   signout: () => void;
 }

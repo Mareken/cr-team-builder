@@ -15,6 +15,7 @@ const Header: React.FC = () => {
   const [ activeTab, setActiveTab ] = useState(0);
   const [ localUserImg, setLocalUserImg ] = useState('01');
   const [ showPopup, setShowPopup ] = useState(false);
+  const [ currPathname, ] = useState(location.pathname);
 
   useEffect(() => {
     const handleKeyDown = (evt: KeyboardEvent) => {
@@ -51,17 +52,17 @@ const Header: React.FC = () => {
     if (location.pathname === '/' && currentUser) {
       setActiveTab(0);
     }
-    else if (location.pathname === '/my-comps' && currentUser) {
+    else if (location.pathname === `/${currentUser?.uid}/my-comps` && currentUser) {
       setActiveTab(1);
     }
   }, [location.pathname, currentUser]);
 
   const openSignup = () => {
-    history.replace('/signup');
+    history.replace('/main/signup');
   }
 
   const openLogin = () => {
-    history.replace('/login');
+    history.replace('/main/login');
   }
 
   const goHome = () => {
@@ -72,10 +73,10 @@ const Header: React.FC = () => {
     setActiveTab(index);
 
     if (index === 0) {
-      history.replace('/');
+      history.replace(currPathname);
     }
     else {
-      history.replace('/my-comps');
+      history.replace(`/${currentUser!.uid}/my-comps`);
     }
   }
 

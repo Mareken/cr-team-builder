@@ -80,7 +80,7 @@ export const PasswordInputWrapper = styled.div`
   }
 `;
 
-export const BtnToggleVisibility = styled.button`
+export const BtnToggleVisibility = styled.div`
   width: 38px;
   height: 38px;
   position: absolute;

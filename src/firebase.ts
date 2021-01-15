@@ -22,4 +22,8 @@ export const signInWithGoogle = () => {
   auth.signInWithPopup(provider);
 }
 
+export const timestamp = () => {
+  return firebase.firestore.FieldValue.serverTimestamp();
+};
+
 export default app;

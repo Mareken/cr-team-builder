@@ -1,6 +1,7 @@
 import React, { createContext, PropsWithChildren, useContext, useState, useEffect } from 'react';
+
 import firebase from 'firebase';
-import { auth } from '../firebase';
+import { auth, firestore } from '../firebase';
 import { AuthData } from '../utils/types';
  
 const AuthContext = createContext<AuthData>({} as AuthData);
@@ -21,6 +22,15 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return auth.signOut();
   }
 
+  const fetchTeamsOfCurrentUser = async () => {
+    const userRef = firestore.collection(`users/${currentUser!.uid}/teams`);
+    const snapshot = await userRef.get();
+
+    if (snapshot) {
+      return snapshot.docs.map(doc => doc.data());
+    }
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
@@ -31,7 +41,7 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, signout }}>
+    <AuthContext.Provider value={{ currentUser, fetchTeamsOfCurrentUser, signup, login, signout }}>
       { !loading && children }
     </AuthContext.Provider>
   )

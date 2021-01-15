@@ -26,11 +26,11 @@ const Traits: React.FC = () => {
   }, [teamTraits.length, setSearchValue]);
 
   useEffect(() => {
-    if (team.length === 0 && teamTraits.length === 0) return;
+    if (team.comp.length === 0 && teamTraits.length === 0) return;
 
     if (teamTraits.length === 0) setHidePartials(false);
 
-    const currTraits = team
+    const currTraits = team.comp
                         .filter(item => item)
                         .filter((v, i, a) => a.findIndex(t => (t.hero.id === v.hero.id)) === i)
                         .map(({ hero }) => ({ race: hero.race, class: hero.class }));

@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
 
-  const toggleVisibility = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const toggleVisibility = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     evt.preventDefault();
     setPasswordVisible(!passwordVisible);
   }

@@ -6,18 +6,22 @@ import useAuth from './context/AuthContext';
 import Initial from './pages/Initial';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import MyComps from './pages/MyComps';
 
 const Routes: React.FC = () => {
   const { currentUser } = useAuth();
 
   return (
     <Switch>
-      <Route exact path='/' component={Initial} />
-      <Route path='/signup'>
+      <Route exact path='/:teamId?' component={Initial} />
+      <Route exact path='/main/signup'>
         { currentUser ? <Redirect to='/' /> : <Signup /> }
       </Route>
-      <Route path='/login'>
+      <Route exact path='/main/login'>
         { currentUser ? <Redirect to='/' /> : <Login /> }
+      </Route>
+      <Route exact path='/:userId/my-comps'>
+        { currentUser ? <MyComps /> : <Redirect to='/' /> }
       </Route>
     </Switch>
   );

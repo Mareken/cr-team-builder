@@ -68,9 +68,8 @@ export const DialogOverlay = styled.div`
 export const Dialog = styled.div`
   position: absolute;
   background: #0A0908;
-  padding: 24px 16px 16px 24px;
-  width: 300px;
-  border-radius: 4px;
+  padding: 24px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -81,32 +80,6 @@ export const Dialog = styled.div`
 
 export const DialogTitle = styled.p`
   color: #fff;
-`;
-
-export const DialogText = styled.p`
-  color: #b1bec7;
-  margin: 8px 0;
-`;
-
-export const DialogFooter = styled.div`
-  align-self: flex-end;
-  display: flex;
-  align-items: center;
-`;
-
-export const DialogBtn = styled.button`
-  background: #0A0908;
-  transition: all .3s ease-in-out;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #0087C2;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 135, 194, .2);
-  }
 `;
 
 export const DialogContainer = styled.div`
@@ -125,7 +98,7 @@ export const DialogContainer = styled.div`
     pointer-events: auto;
 
     ${DialogOverlay} {
-      background: rgba(0, 0, 0, .5);
+      background: rgba(0, 0, 0, .6);
     }
 
     ${Dialog} {
@@ -133,5 +106,47 @@ export const DialogContainer = styled.div`
       opacity: 1;
       transform: scale(1);
     }
+  }
+`;
+
+export const DialogLinkContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+`;
+
+export const DialogLinkIcon = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 0 0 5px;
+  background: #22333B;
+`;
+
+export const DialogLinkInput = styled.input`
+  height: 50px;
+  border: none;
+  background: #22333B;
+  flex: 1;
+  color: #fff;
+`;
+
+export const DialogLinkBtnCopy = styled.button`
+  text-align: center;
+  color: #0087C2;
+  font-weight: 600;
+  height: 50px;
+  padding: 0 16px;
+  background: #22333B;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: all .15s ease;
+
+  &:hover {
+    background: #344852;
   }
 `;
