@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
-import { signInWithGoogle } from '../../firebase';
+import { signInWithProvider } from '../../firebase';
 import googleIcon from '../../assets/images/google_icon.svg';
+import fbIcon from '../../assets/images/fb_icon.svg';
 
-import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText } from './styles';
+import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText, BtnFacebookLogin, BtnFacebookLoginText, FacebookLogo } from './styles';
 
 const Signup: React.FC = () => {
   const { signup } = useAuth();
@@ -40,7 +41,7 @@ const Signup: React.FC = () => {
       setEmail('');
       setPassword('');
 
-      history.replace('/');
+      history.push('/');
     }
     catch {
       setError('Oops, houve algum erro ao criar o usuário. Por favor tente novamente');
@@ -94,10 +95,15 @@ const Signup: React.FC = () => {
 
         <HrLine />
 
-        <BtnGoogleLogin onClick={signInWithGoogle}>
+        <BtnGoogleLogin onClick={() => signInWithProvider('google')}>
           <GoogleLogo src={googleIcon} />
           <BtnGoogleLoginText>Criar conta com Google</BtnGoogleLoginText>
         </BtnGoogleLogin>
+
+        <BtnFacebookLogin onClick={() => signInWithProvider('facebook')}>
+          <FacebookLogo src={fbIcon} />
+          <BtnFacebookLoginText>Criar conta com Facebok</BtnFacebookLoginText>
+        </BtnFacebookLogin>
 
         <FooterText>Já tem uma conta? <Link to='/login'>Entre aqui</Link></FooterText>
       </FormContainer>

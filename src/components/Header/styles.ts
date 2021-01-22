@@ -80,7 +80,7 @@ export const ProfilePic = styled.img`
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 0 1px #fff inset;
+  box-shadow: 0 0 0 1px #b1bec7, 0 0 0 1px #b1bec7 inset;
 `;
 
 export const UserPopup = styled.div`

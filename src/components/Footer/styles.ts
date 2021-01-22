@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background: #344852;
-  padding: 32px 80px;
+  padding: 16px 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,9 +12,10 @@ export const Container = styled.div`
   bottom: 0;
   left: 0;
   transition: all .15s ease;
+  min-height: 200px;
 
   @media screen and (max-width: 768px) {
-    padding: 0 20px;
+    padding: 16px 20px;
   }
 `;
 

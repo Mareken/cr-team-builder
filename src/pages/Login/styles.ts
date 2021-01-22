@@ -178,7 +178,7 @@ export const BtnGoogleLogin = styled.button`
   width: 100%;
   display: flex;
   align-items: center;
-  margin: 32px 0;
+  margin: 32px 0 16px 0;
 
   &:hover {
     background: #3775de;
@@ -196,6 +196,39 @@ export const GoogleLogo = styled.img`
 `;
 
 export const BtnGoogleLoginText = styled.p`
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  transform: translateX(-15px);
+`;
+
+export const BtnFacebookLogin = styled.button`
+  background: #475993;
+  border-radius: 5px;
+  height: 45px;
+  cursor: pointer;
+  transition: all .15s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+
+  &:hover {
+    background: #3b4a7a;
+  }
+`;
+
+export const FacebookLogo = styled.img`
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  margin-right: 8px;
+  border-radius: 4px;
+  background: #fff;
+  padding: 8px;
+`;
+
+export const BtnFacebookLoginText = styled.p`
   color: #fff;
   text-align: center;
   margin: auto;

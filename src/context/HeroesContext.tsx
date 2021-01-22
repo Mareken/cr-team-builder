@@ -4,7 +4,7 @@ import { HeroesData } from '../utils/types';
 
 import anubis from '../assets/images/thumbs/anubis_thumb.svg';
 import archanjo from '../assets/images/thumbs/archangel_thumb.svg';
-import atena from '../assets/images/thumbs/atena_thumb.svg';
+import atena from '../assets/images/thumbs/atena_thumb.png';
 import bajie from '../assets/images/thumbs/bajie_thumb.png';
 import bangar from '../assets/images/thumbs/bangar_thumb.png';
 import berserker from '../assets/images/thumbs/berserker_thumb.png';
@@ -72,7 +72,7 @@ import witchDoctor from '../assets/images/thumbs/witch_doctor_thumb.png';
 import wolfCavalier from '../assets/images/thumbs/wolf_cavalier_thumb.png';
 import wujing from '../assets/images/thumbs/wujing_thumb.svg';
 import wukong from '../assets/images/thumbs/wukong_thumb.png';
-import zeus from '../assets/images/thumbs/zeus_thumb.svg';
+import zeus from '../assets/images/thumbs/zeus_thumb.png';
 
 const initialState = [
   {

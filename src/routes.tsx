@@ -13,11 +13,12 @@ const Routes: React.FC = () => {
 
   return (
     <Switch>
-      <Route exact path='/:teamId?' component={Initial} />
-      <Route exact path='/main/signup'>
+      <Route exact path='/' component={Initial} />
+      <Route exact path='/?u=:uid&t=:id' component={Initial} />
+      <Route exact path='/signup'>
         { currentUser ? <Redirect to='/' /> : <Signup /> }
       </Route>
-      <Route exact path='/main/login'>
+      <Route exact path='/login'>
         { currentUser ? <Redirect to='/' /> : <Login /> }
       </Route>
       <Route exact path='/:userId/my-comps'>

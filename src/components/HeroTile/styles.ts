@@ -10,59 +10,6 @@ interface Props {
   level: number;
 }
 
-export const LevelContainer = styled.div<Pick<Props, 'level'>>`
-  z-index: 5;
-  position: absolute;
-  top: 0;
-  left: 50%;  
-  transform: translate(-50%, -65%);
-  width: 100%;
-  opacity: 1;
-  pointer-events: none;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  opacity: ${props => props.level > 1 ? 1 : 0};
-
-  > div {
-    align-self: center;
-    width: 100%;
-    height: 100%;
-    pointer-events: none !important;
-
-    > div {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none !important;
-
-      > span {
-        text-shadow: 0 2px 5px rgba(0,0,0,.8);
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        height: 100%;
-        padding: 0 3px;
-        flex: 1;
-        pointer-events: ${props => props.level > 1 ? 'auto' : 'none'} !important;
-
-        &:first-of-type {
-          transform: translateX(3px);
-        }
-
-        &:last-of-type {
-          transform: translateX(-3px);
-        }
-      }
-    }
-  }
-`;
-
 export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   height: 70px;
   border: 2px solid transparent;
@@ -76,14 +23,11 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   justify-content: center;
   position: relative;
   transform: ${props => props.board ? 'translateY(-2px) scaleX(1.05)' : 'none'};
-
+  
   &:hover {
-    ${LevelContainer} {
+    > div + div {
       opacity: 1;
-
-      > div > div > span {
-        pointer-events: auto !important;
-      }
+      z-index: 25;
     }
   }
 
@@ -114,4 +58,101 @@ export const Thumb = styled.div<Pick<Props, 'bg' | 'isSvg'>>`
   background-size: contain;
   background-repeat: no-repeat;
   z-index: ${props => props.isSvg ? 5 : 1};
+`;
+
+export const HeroTooltip = styled.div`
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  background: #344852;
+  border-radius: 4px;
+  border: 1px solid #425C68;
+  z-index: 15;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: all .05s ease;
+  z-index: 20;
+  font-size: 14px;
+  min-width: 250px;
+  pointer-events: none;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  padding: 8px 16px;
+  position: relative;
+  
+  &:first-of-type {
+    border-bottom: 1px solid #425C68;
+    padding-right: 60px;
+  }
+
+  &:last-of-type {
+    flex-wrap: wrap;
+  }
+`;
+
+export const TooltipThumb = styled.div<Pick<Props, 'bg'>>`
+  flex: 0 0 32px;
+  height: 32px;
+  background: ${props => `url(${props.bg})`};
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+`;
+
+export const TooltipName = styled.p`
+  color: #fff;
+  margin-left: 8px;
+  display: block;
+`;
+
+export const TooltipTrait = styled.p`
+  color: #fff;
+  margin-right: 4px;
+
+  &:not(:last-of-type) {
+    &::after {
+      content: '•';
+      display: inline-block;
+      margin-left: 4px;
+      color: #425C68;
+    }
+  }
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+`;
+
+export const TooltipCost = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #425C68;
+  width: 40px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 4px;
+`;
+
+export const TooltipCostIcon = styled.div<Pick<Props, 'bg'>>`
+  width: 16px;
+  height: 14px;
+  background: ${props => `url(${props.bg})`};
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-right: 4px;
+  transform: rotate(90deg);
+`;
+
+export const TooltipCostText = styled.p`
+  color: #fff;
 `;

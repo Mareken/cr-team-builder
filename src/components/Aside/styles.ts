@@ -150,3 +150,30 @@ export const DialogLinkBtnCopy = styled.button`
     background: #344852;
   }
 `;
+
+export const DialogLoginAlert = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DialogLoginAlertText = styled.p`
+  color: #b1bec7;
+`;
+
+export const DialogLoginAlertBtn = styled.button`
+  text-align: center;
+  color: #0087C2;
+  font-weight: 600;
+  height: 40px;
+  padding: 0 16px;
+  background: #22333B;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all .15s ease;
+
+  &:hover {
+    background: #344852;
+  }
+`;

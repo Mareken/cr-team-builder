@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/images/logo_full.png';
 import useAuth from '../../context/AuthContext';
+import useTeam from '../../context/TeamContext';
 
 import { Container, Logo, Actions, SignupBtn, LoginBtn, UserArea, ProfilePic, SubHeader, Tab, UserPopup, PopupAction, UserPopupContainer, UserPopupOverlay } from './styles';
 
@@ -11,6 +12,7 @@ const Header: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const { currentUser, signout } = useAuth();
+  const { clearTeam } = useTeam();
   const { t } = useTranslation();
   const [ activeTab, setActiveTab ] = useState(0);
   const [ localUserImg, setLocalUserImg ] = useState('01');
@@ -58,25 +60,21 @@ const Header: React.FC = () => {
   }, [location.pathname, currentUser]);
 
   const openSignup = () => {
-    history.replace('/main/signup');
+    history.push('/signup');
   }
 
   const openLogin = () => {
-    history.replace('/main/login');
-  }
-
-  const goHome = () => {
-    history.replace('/');
+    history.push('/login');
   }
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
 
     if (index === 0) {
-      history.replace(currPathname);
+      history.push(currPathname);
     }
     else {
-      history.replace(`/${currentUser!.uid}/my-comps`);
+      history.push(`/${currentUser!.uid}/my-comps`);
     }
   }
 
@@ -88,6 +86,7 @@ const Header: React.FC = () => {
   
       if (status) {
         signout();
+        clearTeam();
       }
     }, 50);
   }
@@ -102,7 +101,11 @@ const Header: React.FC = () => {
 
   return (
     <Container isLogged={currentUser ? true : false}>
-      <Logo src={logo} className='noSelect' onClick={goHome} />
+      <Logo
+        src={logo}
+        className='noSelect'
+        onClick={() => history.push('/')}
+      />
       <Actions>
         {
           currentUser ? (

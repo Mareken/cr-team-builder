@@ -16,10 +16,11 @@ const app = firebase.initializeApp({
 export const firestore = firebase.firestore();
 export const auth = app.auth();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const fbProvider = new firebase.auth.FacebookAuthProvider();
 
-export const signInWithGoogle = () => {
-  auth.signInWithPopup(provider);
+export const signInWithProvider = (provider: string) => {
+  auth.signInWithPopup(provider === 'google' ? googleProvider : fbProvider);
 }
 
 export const timestamp = () => {

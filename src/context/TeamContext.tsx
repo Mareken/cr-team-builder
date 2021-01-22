@@ -2,7 +2,7 @@ import React, { createContext, PropsWithChildren, useContext, useState } from 'r
 
 import { firestore, timestamp } from '../firebase';
 import { uid } from '../utils/helpers';
-import { Hero, TeamData } from '../utils/types';
+import { Hero, TeamData, Team } from '../utils/types';
 
 const TeamContext = createContext<TeamData>({} as TeamData);
 
@@ -71,10 +71,14 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
   };
 
   const clearTeam = () => {
-    setTeam({ ...team, comp: Array(32).fill('') });
+    setTeam({ id: uid(), comp: Array(32).fill('') });
   }
 
-  const saveTeam = async (userId: string) => {
+  const saveTeam = async (userId: string, localTeam?: { id: string, comp: Team[]; }) => {
+    if (localTeam) {
+      setTeam(localTeam);
+    }
+
     if (team.comp.some(item => item)) {
       setLoading(true);
 
@@ -117,14 +121,15 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
     }
   }
 
-  const fetchTeam = async (userId: string, teamId: string) => {
-    const userRef = firestore.collection(`users/${userId}/teams`).doc(teamId);
+  const fetchTeam = async (userId: string | string[], teamId: string | string[]) => {
+    const tId = Array.isArray(teamId) ? teamId[0] : teamId;
+    const userRef = firestore.collection(`users/${userId}/teams`).doc(tId);
 
     const status = await userRef.get();
 
     if (status.exists) {
       setTeam({
-        id: teamId,
+        id: tId,
         comp: status.data()!.comp
       })
 

@@ -13,10 +13,10 @@ For styling, the choice was styled-components 💅
 
 ## To Do
 
-- [x] ~~Add level to heroes (1, 2, 3 stars)~~
-- [ ] Add items
+- [x] ~~Login with Google / Facebook~~
+- [x] ~~Better tooltips when hovering over a hero~~
 - [ ] Show the team cost (total)
-- [ ] Better tooltips when hovering over a hero
+- [ ] Add basic items
 
 ## Contributing
 

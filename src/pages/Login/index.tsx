@@ -3,16 +3,25 @@ import React, { useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiEye, mdiEyeOff } from '@mdi/js';
 import { Link } from 'react-router-dom';
-import useAuth from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
+import qs from 'query-string';
+import useAuth from '../../context/AuthContext';
+import useTeam from '../../context/TeamContext';
 
-import { signInWithGoogle } from '../../firebase';
+import { signInWithProvider } from '../../firebase';
 import googleIcon from '../../assets/images/google_icon.svg';
+import fbIcon from '../../assets/images/fb_icon.svg';
 
-import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText } from './styles';
+import { Container, FormContainer, Heading, ErrorMessage, Form, Label, Input, PasswordInputWrapper, BtnToggleVisibility, BtnSend, FooterText, LoadingContainer, Dot, HrLine, BtnGoogleLogin, GoogleLogo, BtnGoogleLoginText, BtnFacebookLogin, FacebookLogo, BtnFacebookLoginText } from './styles';
+
+interface TeamProps {
+  id: string;
+  comp: any[]
+}
 
 const Login: React.FC = () => {
   const { login } = useAuth();
+  const { saveTeam } = useTeam();
   const history = useHistory();
   const [ passwordVisible, setPasswordVisible ] = useState(false);
   const [ loading, setLoading ] = useState(false);
@@ -27,27 +36,45 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (evt: React.FormEvent<HTMLDivElement>) => {
     evt.preventDefault();
+    evt.nativeEvent.preventDefault();
 
     if (!email.trim() || !password.trim()) {
       return setError('Algum campo está vazio');
     }
 
-    try {
-      setError('');
-      setLoading(true);
-      
-      await login(email, password);
+    setError('');
+    setLoading(true);
+    
+    login(email, password)
+      .then(res => {
+        if (res.user) {
+          setEmail('');
+          setPassword('');
+          setLoading(false);
 
-      setEmail('');
-      setPassword('');
+          const team = localStorage.getItem('team');
+  
+          if (team) {
+            const parsed: TeamProps = JSON.parse(team);
 
-      history.replace('/');
-    }
-    catch {
-      setError('Não encontramos nenhum registro com essa combinação de usuário e senha');
-    }
+            saveTeam(res.user.uid, parsed);
 
-    setLoading(false);
+            const queryParams = {
+              t: parsed.id,
+              u: res.user.uid
+            }
+  
+            history.push({
+              pathname: '/',
+              search: qs.stringify(queryParams)
+            });
+          }
+        }
+      })
+      .catch(() => {
+        setError('Não encontramos nenhum registro com essa combinação de usuário e senha');
+        setLoading(false);
+      })
   }
 
   return (
@@ -95,10 +122,15 @@ const Login: React.FC = () => {
 
         <HrLine />
 
-        <BtnGoogleLogin onClick={signInWithGoogle}>
+        <BtnGoogleLogin onClick={() => signInWithProvider('google')}>
           <GoogleLogo src={googleIcon} />
           <BtnGoogleLoginText>Entrar com Google</BtnGoogleLoginText>
         </BtnGoogleLogin>
+
+        <BtnFacebookLogin onClick={() => signInWithProvider('facebook')}>
+          <FacebookLogo src={fbIcon} />
+          <BtnFacebookLoginText>Entrar com Facebok</BtnFacebookLoginText>
+        </BtnFacebookLogin>
 
         <FooterText>Ainda não tem uma conta? <Link to='/signup'>Criar agora</Link></FooterText>
       </FormContainer>

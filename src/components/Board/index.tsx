@@ -12,11 +12,12 @@ const Board: React.FC = () => {
   return (
     <Container>
       {
-        team.comp.map((item: Team, i: number) => (
+        team.comp.map((item: Team, index: number) => (
           <BoardTile
-            key={i}
+            key={index}
             hero={item.hero}
-            index={i}
+            index={index}
+            level={item.level}
           />
         ))
       }

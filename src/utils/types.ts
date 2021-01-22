@@ -51,8 +51,8 @@ export interface TeamData {
   removeHero: (hero: Hero, position: number) => void;
   swapPositions: (id: number, finalPos: number) => void;
   clearTeam: () => void;
-  saveTeam: (userId: string) => void;
-  fetchTeam: (userId: string, teamId: string) => Promise<boolean>;
+  saveTeam: (userId: string, localTeam?: { id: string; comp: any[]; }) => void;
+  fetchTeam: (userId: string | string[], teamId: string | string[]) => Promise<boolean>;
   changeHeroLevel: (position: number, level: number) => void;
 }
 

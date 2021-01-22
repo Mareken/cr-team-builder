@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 import Icon from '@mdi/react';
 import { mdiLinkVariant } from '@mdi/js';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import qs from 'query-string';
 import useTeam from '../../context/TeamContext';
 import useAuth from '../../context/AuthContext';
 
-import { Container, BtnClearTeam, BtnSaveTeam, BtnShare, Dialog, DialogTitle, DialogContainer, DialogOverlay, DialogLinkContainer, DialogLinkIcon, DialogLinkInput, DialogLinkBtnCopy } from './styles';
+import { Container, BtnClearTeam, BtnSaveTeam, BtnShare, Dialog, DialogTitle, DialogContainer, DialogOverlay, DialogLinkContainer, DialogLinkIcon, DialogLinkInput, DialogLinkBtnCopy, DialogLoginAlert, DialogLoginAlertText, DialogLoginAlertBtn } from './styles';
 
 const Aside: React.FC = () => {
   const { clearTeam, saveTeam, loading, team } = useTeam();
   const { currentUser } = useAuth();
   const { t } = useTranslation();
   const history = useHistory();
-  const { teamId } = useParams<{ teamId: string | undefined }>();
+  const location = useLocation();
   const [ dialogOpen, setDialogOpen ] = useState(false);
   const [ url, setUrl ] = useState(window.location.href);
   const [ copying, setCopying ] = useState(false);
@@ -41,8 +42,21 @@ const Aside: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const sum = team.comp
+                  .map(item => item && item.hero.cost)
+                  .reduce((a, b) => a + b, 0);
+
+    console.log(sum);
+  }, [team]);
+
   const openDialog = () => {
-    setDialogOpen(true);
+    if (team.comp.some(item => item)) {
+      setDialogOpen(true);
+    }
+    else {
+      alert('O time está vazio 😐');
+    } 
   }
 
   const closeDialog = () => {
@@ -50,23 +64,25 @@ const Aside: React.FC = () => {
   }
 
   const handleSaveTeam = () => {
-    saveTeam(currentUser!.uid);
-
-    if (!teamId) {
-      setUrl(`${window.location.href}/${team.id}`);
-      history.replace(`/${team.id}`);
+    if (team.comp.some(item => item)) {
+      saveTeam(currentUser!.uid);
+  
+      const { u, t } = qs.parse(location.search);
+  
+      if ((!t || !u) && currentUser) {
+        setUrl(`${window.location.href}?u=${currentUser.uid}&t=${team.id}`);
+        history.push(`/?u=${currentUser.uid}&t=${team.id}`);
+      }
     }
-  }
-
-  const handleShareTeam = () => {
-    if (currentUser?.uid) {
-      handleSaveTeam();
-      copyToClipboard();
+    else {
+      alert('O time está vazio 😐');
     }
   }
 
   const copyToClipboard = () => {
-    if (teamId) {
+    const { u, t } = qs.parse(location.search);
+
+    if (u && t) {
       setCopying(true);
 
       const el = document.createElement('textarea');
@@ -81,17 +97,34 @@ const Aside: React.FC = () => {
       }, 500);
     }
   }
+
+  const handleShareTeam = () => {
+    saveTeam(currentUser!.uid);
+    copyToClipboard();
+  }
+
+  const handleClearTeam = () => {
+    clearTeam();
+    setUrl('/');
+    history.push('/');
+  }
+
+  const saveToStorageAndRedirectToLogin = () => {
+    localStorage.setItem('team', JSON.stringify(team));
+
+    history.push('/login');
+  }
   
   return (
     <Container>
-      <BtnClearTeam onClick={clearTeam}>{t('aside.clearTeam')}</BtnClearTeam>
+      <BtnClearTeam onClick={handleClearTeam}>{t('aside.clearTeam')}</BtnClearTeam>
       {
         currentUser && (
           <BtnSaveTeam
             onClick={handleSaveTeam}
             disabled={loading}
           >
-            {loading ? 'Salvando' : t('aside.saveTeam')}
+            {loading ? 'Salvando...' : t('aside.saveTeam')}
           </BtnSaveTeam>
         )
       }
@@ -101,23 +134,36 @@ const Aside: React.FC = () => {
         <DialogOverlay onClick={closeDialog} />
         
         <Dialog>
-          <DialogTitle>Compartilhar composição</DialogTitle>
-          <DialogLinkContainer>
-            <DialogLinkIcon>
-              <Icon
-                path={mdiLinkVariant}
-                size='24px'
-                color='#b1bec7'
-              />
-            </DialogLinkIcon>
-            <DialogLinkInput
-              value={url}
-              readOnly
-            />
-            <DialogLinkBtnCopy onClick={handleShareTeam} disabled={copying}> 
-              { copying ? 'Copiando...' : 'Copiar' }
-            </DialogLinkBtnCopy>
-          </DialogLinkContainer>
+          {
+            currentUser ? (
+              <>
+                <DialogTitle>Compartilhar composição</DialogTitle>
+                <DialogLinkContainer>
+                  <DialogLinkIcon>
+                    <Icon
+                      path={mdiLinkVariant}
+                      size='24px'
+                      color='#b1bec7'
+                    />
+                  </DialogLinkIcon>
+                  <DialogLinkInput
+                    value={url}
+                    readOnly
+                  />
+                  <DialogLinkBtnCopy onClick={handleShareTeam} disabled={copying}> 
+                    { copying ? 'Copiando...' : 'Copiar' }
+                  </DialogLinkBtnCopy>
+                </DialogLinkContainer>
+              </>
+            ) : (
+              <DialogLoginAlert>
+                <DialogLoginAlertText>Faça login para compartilhar seu time</DialogLoginAlertText>
+                <DialogLoginAlertBtn onClick={saveToStorageAndRedirectToLogin}>
+                  Entrar
+                </DialogLoginAlertBtn>
+              </DialogLoginAlert>
+            )
+          }
         </Dialog>
       </DialogContainer>
 

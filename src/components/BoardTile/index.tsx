@@ -12,6 +12,7 @@ interface BoardTileProps {
   hero: Hero;
   index: number;
   isOver?: boolean;
+  level: number;
 }
 
 interface DragType extends DragObjectWithType {
@@ -24,7 +25,7 @@ interface MonitorType extends DropTargetMonitor {
   targetId?: string;
 }
 
-const BoardTile: React.FC<BoardTileProps> = ({ hero, index }) => {
+const BoardTile: React.FC<BoardTileProps> = ({ hero, index, level }) => {
   const { addHero, swapPositions } = useTeam();
 
   const [{ isOver }, drop ] = useDrop({
@@ -55,6 +56,7 @@ const BoardTile: React.FC<BoardTileProps> = ({ hero, index }) => {
             hero={hero} 
             onBoard={true}
             index={index}
+            level={level}
           />
         )
       }
