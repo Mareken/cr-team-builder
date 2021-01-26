@@ -20,7 +20,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 const fbProvider = new firebase.auth.FacebookAuthProvider();
 
 export const signInWithProvider = (provider: string) => {
-  auth.signInWithPopup(provider === 'google' ? googleProvider : fbProvider);
+  return auth.signInWithPopup(provider === 'google' ? googleProvider : fbProvider);
 }
 
 export const timestamp = () => {

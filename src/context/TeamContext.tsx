@@ -91,8 +91,6 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
             comp: team.comp,
             updatedAt: timestamp()
           });
-  
-          console.log('Documento atualizado');
           
           setLoading(false);
           setError('');
@@ -108,14 +106,12 @@ const TeamProvider = ({ children }: PropsWithChildren<unknown>) => {
             comp: team.comp,
             createdAt: timestamp()
           });
-  
-          console.log('Documento criado');
           
           setLoading(false);
           setError('');
         }
         catch (err) {
-          console.error(`Erro ao atualizar time ${err}`);
+          console.error(`Erro ao criar time ${err}`);
         }
       }
     }

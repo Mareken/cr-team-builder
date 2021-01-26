@@ -77,6 +77,38 @@ const Login: React.FC = () => {
       })
   }
 
+  const handleLoginWithProvider = (provider: string) => {
+    signInWithProvider(provider)
+      .then(res => {
+        if (res.user) {
+          setEmail('');
+          setPassword('');
+          setLoading(false);
+
+          const team = localStorage.getItem('team');
+  
+          if (team) {
+            const parsed: TeamProps = JSON.parse(team);
+
+            saveTeam(res.user.uid, parsed);
+
+            const queryParams = {
+              t: parsed.id,
+              u: res.user.uid
+            }
+  
+            history.push({
+              pathname: '/',
+              search: qs.stringify(queryParams)
+            });
+          }
+        }
+      })
+      .catch(() => {
+        return;
+      })
+  }
+
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
@@ -122,12 +154,12 @@ const Login: React.FC = () => {
 
         <HrLine />
 
-        <BtnGoogleLogin onClick={() => signInWithProvider('google')}>
+        <BtnGoogleLogin onClick={() => handleLoginWithProvider('google')}>
           <GoogleLogo src={googleIcon} />
           <BtnGoogleLoginText>Entrar com Google</BtnGoogleLoginText>
         </BtnGoogleLogin>
 
-        <BtnFacebookLogin onClick={() => signInWithProvider('facebook')}>
+        <BtnFacebookLogin onClick={() => handleLoginWithProvider('facebook')}>
           <FacebookLogo src={fbIcon} />
           <BtnFacebookLoginText>Entrar com Facebok</BtnFacebookLoginText>
         </BtnFacebookLogin>

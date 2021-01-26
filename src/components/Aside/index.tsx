@@ -42,13 +42,11 @@ const Aside: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const sum = team.comp
-                  .map(item => item && item.hero.cost)
-                  .reduce((a, b) => a + b, 0);
-
-    console.log(sum);
-  }, [team]);
+  // useEffect(() => {
+  //   const sum = team.comp
+  //                 .map(item => item && item.hero.cost)
+  //                 .reduce((a, b) => a + b, 0);
+  // }, [team]);
 
   const openDialog = () => {
     if (team.comp.some(item => item)) {

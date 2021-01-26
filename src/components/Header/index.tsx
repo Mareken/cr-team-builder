@@ -87,6 +87,8 @@ const Header: React.FC = () => {
       if (status) {
         signout();
         clearTeam();
+
+        history.replace('/');
       }
     }, 50);
   }
