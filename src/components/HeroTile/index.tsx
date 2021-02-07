@@ -48,12 +48,12 @@ const HeroTile: React.FC<HeroTileProps> = ({ hero, onBoard = false, index, level
       onClick={handleAddHero}
       onContextMenu={handleRemoveHero}
     >
-      <Thumb bg={hero.thumb} isSvg={hero.thumb.includes('.svg')} ref={drag} style={{ opacity }} />
+      <Thumb bg={hero.thumb} ref={drag} style={{ opacity }} />
 
       <HeroTooltip>
         <Row>
           <TooltipThumb bg={hero.thumb} />
-          <TooltipName>{hero.name}</TooltipName>
+          <TooltipName cost={hero.cost}>{hero.name}</TooltipName>
           <TooltipCost>
             <TooltipCostIcon bg={mana} />
             <TooltipCostText>{hero.cost}</TooltipCostText>

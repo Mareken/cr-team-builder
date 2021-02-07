@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-const colors = [ '#fff', '#5BB2C4', '#3392E0', '#D92BD2', '#DFB460' ];
+const colors = [ '#fff', '#4EB9DA', '#1581D3', '#9E22CF', '#E18E13' ];
 
 interface Props {
   cost: number;
   board: boolean;
-  isSvg: boolean;
   bg: string;
   level: number;
 }
@@ -14,7 +13,6 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
   height: 70px;
   border: 2px solid transparent;
   border-radius: 4px;
-  background: #344852;
   cursor: pointer;
   border-color: ${props => colors[props.cost - 1]};
   transition: all .1s ease;
@@ -38,9 +36,9 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
 
 export const FeaturedBadge = styled.div<Pick<Props, 'cost'>>`
   position: absolute;
-  bottom: -2px;
+  bottom: -1px;
   right: -1px;
-  border-radius: 4px 0 0 2px;
+  border-radius: 4px 0 1px 0;
   background: ${props => colors[props.cost - 1]};
   display: flex;
   align-items: center;
@@ -50,14 +48,14 @@ export const FeaturedBadge = styled.div<Pick<Props, 'cost'>>`
   z-index: 2;
 `;
 
-export const Thumb = styled.div<Pick<Props, 'bg' | 'isSvg'>>`
-  width: ${props => props.isSvg ? '100%' : '80%'};
-  height: ${props => props.isSvg ? '100%' : '80%'};
+export const Thumb = styled.div<Pick<Props, 'bg'>>`
+  width: 100%;
+  height: 100%;
   background: ${props => `url(${props.bg})`};
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  z-index: ${props => props.isSvg ? 5 : 1};
+  position: relative;
 `;
 
 export const HeroTooltip = styled.div`
@@ -105,10 +103,11 @@ export const TooltipThumb = styled.div<Pick<Props, 'bg'>>`
   background-repeat: no-repeat;
 `;
 
-export const TooltipName = styled.p`
-  color: #fff;
+export const TooltipName = styled.p<Pick<Props, 'cost'>>`
+  color: ${props => colors[props.cost - 1]};
   margin-left: 8px;
   display: block;
+  font-family: 'SpaceGrotesk Bold';
 `;
 
 export const TooltipTrait = styled.p`
@@ -143,14 +142,13 @@ export const TooltipCost = styled.div`
 `;
 
 export const TooltipCostIcon = styled.div<Pick<Props, 'bg'>>`
-  width: 16px;
-  height: 14px;
+  width: 14px;
+  height: 16px;
   background: ${props => `url(${props.bg})`};
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
   margin-right: 4px;
-  transform: rotate(90deg);
 `;
 
 export const TooltipCostText = styled.p`

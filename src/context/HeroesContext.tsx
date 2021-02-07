@@ -2,29 +2,30 @@ import React, { createContext, useContext, useState, PropsWithChildren } from 'r
 import { uid } from '../utils/helpers';
 import { HeroesData } from '../utils/types';
 
-import anubis from '../assets/images/thumbs/anubis_thumb.svg';
-import archanjo from '../assets/images/thumbs/archangel_thumb.svg';
+import anubis from '../assets/images/thumbs/anubis_thumb.png';
+import archangel from '../assets/images/thumbs/archangel_thumb.png';
 import atena from '../assets/images/thumbs/atena_thumb.png';
 import bajie from '../assets/images/thumbs/bajie_thumb.png';
 import bangar from '../assets/images/thumbs/bangar_thumb.png';
 import berserker from '../assets/images/thumbs/berserker_thumb.png';
 import bionicNinja from '../assets/images/thumbs/bionic_ninja_thumb.png';
 import calamity from '../assets/images/thumbs/calamity_thumb.png';
-import cerberus from '../assets/images/thumbs/cerberus_thumb.svg';
-import darkWizard from '../assets/images/thumbs/dark_wizard_thumb.svg';
+import cerberus from '../assets/images/thumbs/cerberus_thumb.png';
+import darkWizard from '../assets/images/thumbs/dark_wizard_thumb.png';
 import dimensionWalker from '../assets/images/thumbs/dimension_walker_thumb.png';
-import drMolly from '../assets/images/thumbs/dr_molly_thumb.svg';
+import drMolly from '../assets/images/thumbs/dr_molly_thumb.png';
 import dragoon from '../assets/images/thumbs/dragoon_thumb.png';
 import everbloom from '../assets/images/thumbs/everbloom_thumb.png';
 import evergreen from '../assets/images/thumbs/evergreen_thumb.png';
 import famine from '../assets/images/thumbs/famine_thumb.png';
-import fireFur from '../assets/images/thumbs/fire_fur_thumb.svg';
+import fireFur from '../assets/images/thumbs/fire_fur_thumb.png';
 import flamecaller from '../assets/images/thumbs/flamecaller_thumb.png';
 import forestsBreath from '../assets/images/thumbs/forests_breath_thumb.png';
 import frostLotus from '../assets/images/thumbs/frost_lotus_thumb.png';
 import generalOfWar from '../assets/images/thumbs/general_of_war_thumb.png';
 import generalPuffer from '../assets/images/thumbs/general_puffer_thumb.png';
 import glutton from '../assets/images/thumbs/glutton_thumb.png';
+import goddessOfBeauty from '../assets/images/thumbs/goddess_of_beauty_thumb.png';
 import groundsmasher from '../assets/images/thumbs/groundsmasher_thumb.png';
 import gurru from '../assets/images/thumbs/gurru_thumb.png';
 import headreaper from '../assets/images/thumbs/headreaper_thumb.png';
@@ -37,7 +38,7 @@ import kraken from '../assets/images/thumbs/kraken_thumb.png';
 import lancelot from '../assets/images/thumbs/lancelot_thumb.png';
 import lightbringer from '../assets/images/thumbs/lightbringer_thumb.png';
 import lilith from '../assets/images/thumbs/lilith_thumb.png';
-import lucifer from '../assets/images/thumbs/lucifer_thumb.svg';
+import lucifer from '../assets/images/thumbs/lucifer_thumb.png';
 import marshLord from '../assets/images/thumbs/marsh_lord_thumb.png';
 import missSupersonic from '../assets/images/thumbs/miss_supersonic_thumb.png';
 import missfortune from '../assets/images/thumbs/missfortune_thumb.png';
@@ -46,22 +47,23 @@ import netherPrince from '../assets/images/thumbs/nether_prince_thumb.png';
 import nezha from '../assets/images/thumbs/nezha_thumb.png';
 import nightingale from '../assets/images/thumbs/nightingale_thumb.png';
 import nightowl from '../assets/images/thumbs/nightowl_thumb.png';
-import poseidon from '../assets/images/thumbs/poseidon_thumb.svg';
+import poseidon from '../assets/images/thumbs/poseidon_thumb.png';
 import protostar from '../assets/images/thumbs/protostar_thumb.png';
-import rafaella from '../assets/images/thumbs/rafaella_thumb.svg';
-import sanzang from '../assets/images/thumbs/sanzang_thumb.svg';
+import rafaella from '../assets/images/thumbs/rafaella_thumb.png';
+import sanzang from '../assets/images/thumbs/sanzang_thumb.png';
 import scourge from '../assets/images/thumbs/scourge_thumb.png';
-import serafim from '../assets/images/thumbs/serafim_thumb.svg';
+import seraph from '../assets/images/thumbs/seraph_thumb.png';
 import siren from '../assets/images/thumbs/siren_thumb.png';
 import stalkerDroneS90 from '../assets/images/thumbs/stalker_drone_s90_thumb.png';
 import starhorn from '../assets/images/thumbs/starhorn_thumb.png';
-import steelfoist from '../assets/images/thumbs/steel_fist_thumb.png';
+import steelfist from '../assets/images/thumbs/steel_fist_thumb.png';
 import stinger from '../assets/images/thumbs/stinger_thumb.png';
 import swordDancer from '../assets/images/thumbs/sword_dancer_thumb.png';
 import templarKnight from '../assets/images/thumbs/templar_knight_thumb.png';
 import theExecutioner from '../assets/images/thumbs/the_executioner_thumb.png';
+import totemface from '../assets/images/thumbs/totemface_thumb.png';
 import joey from '../assets/images/thumbs/the_ultimate_weapon_thumb.png';
-import uriella from '../assets/images/thumbs/uriella_thumb.svg';
+import uriella from '../assets/images/thumbs/uriella_thumb.png';
 import venom from '../assets/images/thumbs/venom_thumb.png';
 import voidDestruction from '../assets/images/thumbs/void_destruction_thumb.png';
 import voidDoom from '../assets/images/thumbs/void_doom_thumb.png';
@@ -70,7 +72,7 @@ import warMachine from '../assets/images/thumbs/war_machine_thumb.png';
 import werewolf from '../assets/images/thumbs/werewolf_thumb.png';
 import witchDoctor from '../assets/images/thumbs/witch_doctor_thumb.png';
 import wolfCavalier from '../assets/images/thumbs/wolf_cavalier_thumb.png';
-import wujing from '../assets/images/thumbs/wujing_thumb.svg';
+import wujing from '../assets/images/thumbs/wujing_thumb.png';
 import wukong from '../assets/images/thumbs/wukong_thumb.png';
 import zeus from '../assets/images/thumbs/zeus_thumb.png';
 
@@ -87,7 +89,7 @@ const initialState = [
   {
     id: uid(),
     name: 'Arcanjo (Michaela)',
-    thumb: archanjo,
+    thumb: archangel,
     class: ['mago'],
     race: ['anjo'],
     featured: true,
@@ -284,6 +286,15 @@ const initialState = [
   },
   {
     id: uid(),
+    name: 'Afrodite (Deusa da Beleza)',
+    thumb: goddessOfBeauty,
+    class: ['olimpiano'],
+    race: ['invocador'],
+    featured: false,
+    cost: 2
+  },
+  {
+    id: uid(),
     name: 'Esmaga Solo',
     thumb: groundsmasher,
     class: ['protetor'],
@@ -401,7 +412,7 @@ const initialState = [
   },
   {
     id: uid(),
-    name: 'Marsh Lord',
+    name: 'Lorde do Pântano',
     thumb: marshLord,
     class: ['invocador', 'mago'],
     race: ['fera'],
@@ -510,7 +521,7 @@ const initialState = [
   {
     id: uid(),
     name: 'Serafim',
-    thumb: serafim,
+    thumb: seraph,
     class: ['Senhor da Guerra'],
     race: ['anjo'],
     featured: false,
@@ -555,7 +566,7 @@ const initialState = [
   {
     id: uid(),
     name: 'Punhos de Aço',
-    thumb: steelfoist,
+    thumb: steelfist,
     class: ['guerreiro'],
     race: ['ciborgue'],
     featured: false,
@@ -599,7 +610,16 @@ const initialState = [
   },
   {
     id: uid(),
-    name: 'Joey',
+    name: 'Totemface',
+    thumb: totemface,
+    class: ['feiticeiro'],
+    race: ['goblin'],
+    featured: true,
+    cost: 1
+  },
+  {
+    id: uid(),
+    name: 'Joey (Garota Arma-Final)',
     thumb: joey,
     class: ['feiticeiro'],
     race: ['ciborgue'],
