@@ -23,8 +23,9 @@ export const Container = styled.header<Props>`
   margin-bottom: 32px;
   position: relative;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     padding: 0 20px;
+    height: 80px;
   }
 `;
 
@@ -37,6 +38,12 @@ export const Actions = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const SignupBtn = styled.button`
@@ -54,6 +61,12 @@ export const SignupBtn = styled.button`
   &:hover {
     border-color: #0087C2;
   }
+
+  @media screen and (max-width: 1024px) {
+    width: 60px;
+    background: #344852;
+    padding-top: 5px;
+  }
 `;
 
 export const LoginBtn = styled.button`
@@ -68,6 +81,11 @@ export const LoginBtn = styled.button`
 
   &:hover {
     background: #006A98;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 60px;
+    padding-top: 5px;
   }
 `;
 

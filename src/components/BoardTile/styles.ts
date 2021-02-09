@@ -23,7 +23,7 @@ export const Container = styled.div<Props>`
     background: #22333B;
   }
 
-  @media screen and (max-width: 1200px) {
-    height: 50px;
+  @media screen and (max-width: 1024px) {
+    height: 35px;
   }
 `;

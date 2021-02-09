@@ -8,9 +8,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center; 
-  position: absolute;
-  bottom: 0;
-  left: 0;
   transition: all .15s ease;
   min-height: 200px;
 

@@ -4,7 +4,6 @@ export const Main = styled.main`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-bottom: 170px;
 `;
 
 export const Center = styled.div`

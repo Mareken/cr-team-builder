@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Search } from 'react-feather';
+import Icon from '@mdi/react';
+import { mdiCircleMultiple, mdiSortAlphabeticalAscending } from '@mdi/js';
 import { useDrop, DragObjectWithType } from 'react-dnd';
 import useHeroes from '../../context/HeroesContext';
 import useTeam from '../../context/TeamContext';
 import useSearch from '../../context/SearchContext';
+import useWindowSize from '../../utils/hooks/useWindowSize';
 import { ItemTypes, Hero } from '../../utils/types';
 
 import HeroTile from '../HeroTile';
@@ -20,6 +23,7 @@ interface DragType extends DragObjectWithType {
 const HeroesGrid: React.FC = () => {
   const { heroes } = useHeroes();
   const { searchValue, setSearchValue } = useSearch();
+  const size = useWindowSize();
 
   const [ sorting, setSorting ] = useState('cost');
   const [ filteredHeroes, setFilteredHeroes ] = useState(heroes);
@@ -94,7 +98,7 @@ const HeroesGrid: React.FC = () => {
         <LeftSide>
           <Search color='#fff' size={24} />
           <SearchInput
-            placeholder='Pesquise por nome, preço ou sinergia'
+            placeholder={size.width > 1024 ? 'Pesquise por nome, custo ou sinergia' : 'Nome, custo ou sinergia'}
             onChange={handleChange}
             value={searchValue}
             type='text'
@@ -105,13 +109,21 @@ const HeroesGrid: React.FC = () => {
             onClick={() => handleSelectSorting('cost')}
             selected={sorting === 'cost'}
           >
-            Preço
+            <Icon
+              path={mdiCircleMultiple}
+              size='24px'
+              color={sorting === 'cost' ? '#fff' : '#b1bec7'}
+            />
           </OrderBtn>
           <OrderBtn
             onClick={() => handleSelectSorting('name')}
             selected={sorting === 'name'}
           >
-            A-Z
+            <Icon
+              path={mdiSortAlphabeticalAscending}
+              size='24px'
+              color={sorting === 'name' ? '#fff' : '#b1bec7'}
+            />
           </OrderBtn>
         </RightSide>
       </Header>

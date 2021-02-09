@@ -29,8 +29,8 @@ export const Container = styled.div<Pick<Props, 'cost' | 'board'>>`
     }
   }
 
-  @media screen and (max-width: 1200px) {
-    height: 50px;
+  @media screen and (max-width: 1024px) {
+    height: 60px;
   }
 `;
 

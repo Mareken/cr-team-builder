@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+import Icon from '@mdi/react';
+import { mdiLogin, mdiAccountPlus } from '@mdi/js';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/images/logo_full.png';
 import useAuth from '../../context/AuthContext';
 import useTeam from '../../context/TeamContext';
+import useWindowSize from '../../utils/hooks/useWindowSize';
 
 import { Container, Logo, Actions, SignupBtn, LoginBtn, UserArea, ProfilePic, SubHeader, Tab, UserPopup, PopupAction, UserPopupContainer, UserPopupOverlay } from './styles';
 
@@ -12,6 +15,7 @@ const Header: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const { currentUser, signout } = useAuth();
+  const size = useWindowSize();
   const { clearTeam } = useTeam();
   const { t } = useTranslation();
   const [ activeTab, setActiveTab ] = useState(0);
@@ -123,8 +127,32 @@ const Header: React.FC = () => {
             </UserArea>
           ) : (
             <UserArea>
-              <SignupBtn onClick={openSignup}>{t('register')}</SignupBtn>
-              <LoginBtn onClick={openLogin}>{t('login')}</LoginBtn>
+              <SignupBtn onClick={openSignup}>
+                {
+                  size.width > 1024 ? (
+                    t('register')
+                  ) : (
+                    <Icon
+                      path={mdiAccountPlus}
+                      size='24px'
+                      color='#fff'
+                    />
+                  )
+                }
+              </SignupBtn>
+              <LoginBtn onClick={openLogin}>
+                {
+                  size.width > 1024 ? (
+                    t('login')
+                  ) : (
+                    <Icon
+                      path={mdiLogin}
+                      size='24px'
+                      color='#fff'
+                    />
+                  )
+                }
+              </LoginBtn>
             </UserArea>
           )
         }
