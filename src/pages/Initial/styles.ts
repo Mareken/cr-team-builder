@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Main = styled.main`
+export const Main = styled(motion.main)`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  padding-top: 100px;
 `;
 
 export const Center = styled.div`

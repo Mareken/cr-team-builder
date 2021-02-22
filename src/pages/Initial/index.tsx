@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { AnimatePresence } from 'framer-motion';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
@@ -8,6 +9,7 @@ import qs from 'query-string';
 import useTeam from '../../context/TeamContext';
 import useWindowSize from '../../utils/hooks/useWindowSize';
 
+import Preloader from '../Preloader';
 import Board from '../../components/Board';
 import HeroesGrid from '../../components/HeroesGrid';
 import Traits from '../../components/Traits';
@@ -42,22 +44,43 @@ const Initial: React.FC = () => {
         history.push('/');
       }
 
-      setMount(true);
+      setTimeout(() => {
+        setMount(true);
+      }, 1000);
     }
 
     return () => setMount(false);
   }, [location.pathname]);
 
+  const variants = {
+    initial: { opacity: 0, scale: 1, y: 50, transition: { duration: .15, easing: 'cubic-bezier(.785,.135,.15,.86)' } },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: .15, easing: 'cubic-bezier(.785,.135,.15,.86)' } },
+    hidden: { opacity: 0, scale: 0.97, y: 0, transition: { duration: .15, easing: 'cubic-bezier(.785,.135,.15,.86)' } },
+  }
+
   return (
     <DndProvider backend={size.width < 1024 ? TouchBackend : HTML5Backend} options={options}>
-      <Main>
-        <Traits />
-        <Center>
-          <Board />
-          <HeroesGrid />
-        </Center>
-        <Aside />
-      </Main>
+      <AnimatePresence exitBeforeEnter={true}>
+        {
+          !mount ? (
+            <Preloader />
+          ) : (
+            <Main
+              variants={variants}
+              initial='initial'
+              animate='visible'
+              exit='initial'
+            >
+              <Traits />
+              <Center>
+                <Board />
+                <HeroesGrid />
+              </Center>
+              <Aside />
+            </Main>
+          )
+        }
+      </AnimatePresence>
     </DndProvider>
   );
 }

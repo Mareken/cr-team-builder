@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 
 import Icon from '@mdi/react';
-import { mdiLogin, mdiAccountPlus } from '@mdi/js';
-import { useHistory, useLocation } from 'react-router-dom';
+import { mdiGithub, mdiLogin } from '@mdi/js';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logo from '../../assets/images/logo_full.png';
+
 import useAuth from '../../context/AuthContext';
 import useTeam from '../../context/TeamContext';
 import useWindowSize from '../../utils/hooks/useWindowSize';
 
-import { Container, Logo, Actions, SignupBtn, LoginBtn, UserArea, ProfilePic, SubHeader, Tab, UserPopup, PopupAction, UserPopupContainer, UserPopupOverlay } from './styles';
+import logo from '../../assets/images/logo.svg';
+
+import { Container, Actions, LogoContainer, Logo, LoginBtn, UserArea, ProfilePic, UserPopup, PopupAction, UserPopupContainer, UserPopupOverlay, GithubBtn } from './styles';
 
 const Header: React.FC = () => {
   const history = useHistory();
-  const location = useLocation();
   const { currentUser, signout } = useAuth();
   const size = useWindowSize();
   const { clearTeam } = useTeam();
   const { t } = useTranslation();
-  const [ activeTab, setActiveTab ] = useState(0);
   const [ localUserImg, setLocalUserImg ] = useState('01');
   const [ showPopup, setShowPopup ] = useState(false);
-  const [ currPathname, ] = useState(location.pathname);
 
   useEffect(() => {
     const handleKeyDown = (evt: KeyboardEvent) => {
@@ -54,32 +53,8 @@ const Header: React.FC = () => {
     }
   }, [currentUser?.photoURL]);
 
-  useEffect(() => {
-    if (location.pathname === '/' && currentUser) {
-      setActiveTab(0);
-    }
-    else if (location.pathname === `/${currentUser?.uid}/my-comps` && currentUser) {
-      setActiveTab(1);
-    }
-  }, [location.pathname, currentUser]);
-
-  const openSignup = () => {
-    history.push('/signup');
-  }
-
   const openLogin = () => {
     history.push('/login');
-  }
-
-  const handleTabClick = (index: number) => {
-    setActiveTab(index);
-
-    if (index === 0) {
-      history.push(currPathname);
-    }
-    else {
-      history.push(`/${currentUser!.uid}/my-comps`);
-    }
   }
 
   const handleLogout = () => {
@@ -106,12 +81,14 @@ const Header: React.FC = () => {
   }
 
   return (
-    <Container isLogged={currentUser ? true : false}>
-      <Logo
-        src={logo}
-        className='noSelect'
-        onClick={() => history.push('/')}
-      />
+    <Container
+      className='noSelect'
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1 }}
+    >
+      <LogoContainer onClick={() => history.push('/')}>
+        <Logo bg={logo} />
+      </LogoContainer>
       <Actions>
         {
           currentUser ? (
@@ -127,19 +104,6 @@ const Header: React.FC = () => {
             </UserArea>
           ) : (
             <UserArea>
-              <SignupBtn onClick={openSignup}>
-                {
-                  size.width > 1024 ? (
-                    t('register')
-                  ) : (
-                    <Icon
-                      path={mdiAccountPlus}
-                      size='24px'
-                      color='#fff'
-                    />
-                  )
-                }
-              </SignupBtn>
               <LoginBtn onClick={openLogin}>
                 {
                   size.width > 1024 ? (
@@ -156,25 +120,19 @@ const Header: React.FC = () => {
             </UserArea>
           )
         }
+        <GithubBtn
+          href='https://github.com/Mareken/cr-team-builder'
+          title='Ir para repositório do GitHub'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <Icon
+            path={mdiGithub}
+            size='24px'
+            color='#fff'
+          />
+        </GithubBtn>
       </Actions>
-      {
-        currentUser && (
-          <SubHeader className='noSelect'>
-            <Tab
-              className={activeTab === 0 ? 'active' : ''}
-              onClick={() => handleTabClick(0)}
-            >
-              {t('subheader.tabOne')}
-            </Tab>
-            <Tab
-              className={activeTab === 1 ? 'active' : ''}
-              onClick={() => handleTabClick(1)}
-            >
-              {t('subheader.tabTwo')}
-            </Tab>
-          </SubHeader>
-        )
-      }
     </Container>
   )
 }

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Container = styled.div`
+interface Props {
+  bg: string;
+}
+
+export const Container = styled(motion.div)`
   background: #344852;
   padding: 16px 80px;
   display: flex;
@@ -10,6 +15,7 @@ export const Container = styled.div`
   text-align: center; 
   transition: all .15s ease;
   min-height: 200px;
+  opacity: 0;
 
   @media screen and (max-width: 768px) {
     padding: 16px 20px;
@@ -22,7 +28,9 @@ export const Row = styled.div`
   margin-bottom: 16px;
 `;
 
-export const FooterMessage = styled.p`
+export const FooterMessage = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 8px;
   color: #fff;
 
@@ -56,4 +64,14 @@ export const SelectLanguage = styled.select`
 
 export const Option = styled.option`
   border: none;
+`;
+
+export const HeartIcon = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => `url(${props.bg})`};
+  width: 24px;
+  height: 24px;
+  margin: 0 8px;
 `;

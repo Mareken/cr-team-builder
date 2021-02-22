@@ -14,7 +14,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 40px 0 80px 0;
+  padding: 100px 0 80px 0;
 `;
 
 export const FormContainer = styled.div`

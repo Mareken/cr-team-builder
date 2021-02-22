@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import Icon from '@mdi/react';
 import { mdiTranslate } from '@mdi/js';
 
-import { Container, Row, FooterMessage, CopyrightMessage, SelectLanguage, Option } from './styles';
+import heartIcon from '../../assets/images/heart_icon.svg';
+
+import { Container, Row, FooterMessage, CopyrightMessage, SelectLanguage, Option, HeartIcon } from './styles';
 
 const Footer: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -14,7 +16,10 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1 }}
+    >
       <Row>
         <Icon
           path={mdiTranslate}
@@ -28,7 +33,7 @@ const Footer: React.FC = () => {
           <Option value='ind'>Bahasa Indonesia</Option>
         </SelectLanguage>
       </Row>
-      <FooterMessage>Criado com ❤️ por <a href='https://github.com/Mareken' target='_blank' rel='noreferrer'>Gabriel Antônio</a></FooterMessage>
+      <FooterMessage>Criado com <HeartIcon bg={heartIcon} /> por&nbsp;<a href='https://github.com/Mareken' target='_blank' rel='noreferrer'>Gabriel Antônio</a></FooterMessage>
       <CopyrightMessage>{t('copyrightMessage')}</CopyrightMessage>
     </Container>
   );
